@@ -2046,8 +2046,8 @@
                     <h2>🔒 Защищённый раздел</h2>
                     <p>Этот раздел содержит внутреннюю информацию о системе мотивации и условиях работы. Доступ только для сотрудников.</p>
                     <div class="password-input-group">
-                        <input type="password" class="password-input" id="password-input" placeholder="Введите пароль" onkeypress="if(event.key==='Enter')checkPassword()">
-                        <button class="btn-check" onclick="checkPassword()">Войти</button>
+                        <input type="password" class="password-input" id="password-input" placeholder="Введите пароль" onkeypress="if(event.key==='Enter')checkProtectedPassword()" oninput="checkProtectedPassword()">
+                        <button class="btn-check" onclick="checkProtectedPassword()">Войти</button>
                     </div>
                     <div class="password-error" id="password-error">Неверный пароль</div>
                     <p style="color: var(--text-light); font-size: 13px; margin-top: 20px;">Пароль можно узнать у руководителя отдела продаж.</p>
@@ -17719,7 +17719,7 @@
 
     <script>
         // Пароль для защищённого раздела
-        const PROTECTED_PASSWORD = 'monastyrenko2026';
+        const PROTECTED_PASSWORD = 'результат';
         
         // Данные о продуктах для модальных окон (расширенный список)
         const products = {
@@ -18266,11 +18266,13 @@
         }
         
         // Проверка пароля для защищённого раздела
-        function checkPassword() {
+        function checkProtectedPassword() {
             const input = document.getElementById('password-input');
             const error = document.getElementById('password-error');
+            const password = input.value.toLowerCase().trim();
+            const passwordRu = convertToRussian(password);
             
-            if (input.value === PROTECTED_PASSWORD) {
+            if (password === PROTECTED_PASSWORD || passwordRu === PROTECTED_PASSWORD) {
                 state.conditionsUnlocked = true;
                 saveState();
                 unlockConditions();
