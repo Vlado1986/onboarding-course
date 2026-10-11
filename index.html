@@ -18695,18 +18695,33 @@
             'гость': 'guest'     // ограниченный доступ
         };
         
+        // Карта раскладок EN → RU
+        const EN_TO_RU = {
+            'q':'й','w':'ц','e':'у','r':'к','t':'е','y':'н','u':'г','i':'ш','o':'щ','p':'з','[':'х',']':'ъ',
+            'a':'ф','s':'ы','d':'в','f':'а','g':'п','h':'р','j':'о','k':'л','l':'д',';':'ж',"'":'э',
+            'z':'я','x':'ч','c':'с','v':'м','b':'и','n':'т','m':'ь',',':'б','.':'ю'
+        };
+        
+        // Конвертировать EN раскладку в RU
+        function convertToRussian(text) {
+            return text.split('').map(char => EN_TO_RU[char.toLowerCase()] || char).join('');
+        }
+        
         function checkPassword() {
             const input = document.getElementById('auth-password');
             const error = document.getElementById('auth-error');
             const password = input.value.toLowerCase().trim();
+            const passwordRu = convertToRussian(password);
             
+            // Проверяем и оригинал и конвертированный
             if (PASSWORDS[password]) {
                 const accessLevel = PASSWORDS[password];
                 localStorage.setItem('course_access', accessLevel);
                 applyAccess(accessLevel);
-            } else if (password.length > 0) {
-                // Показываем ошибку только если что-то введено и это не пароль
-                // Но не показываем при автопроверке — только при явном нажатии
+            } else if (PASSWORDS[passwordRu]) {
+                const accessLevel = PASSWORDS[passwordRu];
+                localStorage.setItem('course_access', accessLevel);
+                applyAccess(accessLevel);
             }
         }
         
