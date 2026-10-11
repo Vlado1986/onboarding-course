@@ -1110,20 +1110,6 @@
             padding-left: 0;
         }
         
-        .section-our-production h1::before {
-            content: "🏭 СОБСТВЕННОЕ ПРОИЗВОДСТВО";
-            display: block;
-            font-size: 11px;
-            font-weight: 700;
-            color: #4caf50;
-            letter-spacing: 1.5px;
-            margin-bottom: 8px;
-            padding: 4px 12px;
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border-radius: 20px;
-            display: inline-block;
-        }
-        
         /* Карточка «Бессрочная гарантия» */
         .warranty-badge {
             display: inline-flex;
@@ -1148,7 +1134,7 @@
     <!-- Экран авторизации -->
     <div class="auth-screen" id="auth-screen">
         <div class="auth-box">
-            <div class="auth-logo">🏠</div>
+            <div class="auth-logo"><img src="images/logo-icon.png" alt="Монастыренко" style="width: 80px; height: auto;"></div>
             <div class="auth-title">Курс введения</div>
             <div class="auth-subtitle">Введите пароль для доступа к материалам</div>
             <input type="password" class="auth-input" id="auth-password" placeholder="Пароль" onkeypress="if(event.key==='Enter')checkPassword()">
@@ -1167,7 +1153,7 @@
     <!-- Боковая навигация -->
     <nav class="nav">
         <div class="nav-header">
-            <div class="nav-logo">Монастыренко</div>
+            <div class="nav-logo"><img src="images/logo-full.png" alt="Монастыренко" style="height: 28px; width: auto;"></div>
             <div class="nav-subtitle">Курс введения сотрудника</div>
         </div>
         
@@ -14058,14 +14044,6 @@
                         <li>Запас на технологический зазор (~10 мм) учитывается автоматически</li>
                     </ul>
                     <p><strong>Типовые размеры столбов:</strong> 380×380, 400×400, 510×510, 520×520 мм (кирпич)</p>
-                </div>
-                
-                <div class="highlight">
-                    <div class="highlight-title">📐 Формула развёртки крышки W</div>
-                    <p><strong>a</strong> = Посадочный размер + Тех.зазор + ШВ×2 (свес крышки)</p>
-                    <p><strong>b</strong> = (a / 2) / cos(Угол) — высота треугольника</p>
-                    <p><strong>D</strong> = 2 × (b + ШГ + Завальцовка) — диаметр развёртки</p>
-                    <p><em>Где ШВ=35мм, ШГ=15мм, Угол=20°, Завальцовка=15мм — типовые значения</em></p>
                 </div>
                 
                 <h2>Материалы</h2>
