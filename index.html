@@ -1137,7 +1137,10 @@
             <div class="auth-logo"><img src="images/logo-icon.png" alt="Монастыренко" style="width: 80px; height: auto;"></div>
             <div class="auth-title">Курс введения</div>
             <div class="auth-subtitle">Введите пароль для доступа к материалам</div>
-            <input type="password" class="auth-input" id="auth-password" placeholder="Пароль" onkeypress="if(event.key==='Enter')checkPassword()">
+            <input type="password" class="auth-input" id="auth-password" placeholder="Пароль" onkeypress="if(event.key==='Enter')checkPassword()" oninput="checkPassword()">
+            <div style="position: relative; margin-top: -10px; margin-bottom: 10px; text-align: right;">
+                <span onclick="togglePasswordVisibility()" style="cursor: pointer; color: #888; font-size: 13px; user-select: none;">👁 показать</span>
+            </div>
             <button class="auth-btn" onclick="checkPassword()">Войти</button>
             <div class="auth-error" id="auth-error">Неверный пароль</div>
             <div class="auth-hint">Пароль можно получить у руководителя</div>
@@ -18701,12 +18704,21 @@
                 const accessLevel = PASSWORDS[password];
                 localStorage.setItem('course_access', accessLevel);
                 applyAccess(accessLevel);
+            } else if (password.length > 0) {
+                // Показываем ошибку только если что-то введено и это не пароль
+                // Но не показываем при автопроверке — только при явном нажатии
+            }
+        }
+        
+        function togglePasswordVisibility() {
+            const input = document.getElementById('auth-password');
+            const toggle = event.target;
+            if (input.type === 'password') {
+                input.type = 'text';
+                toggle.textContent = '👁 скрыть';
             } else {
-                input.classList.add('error');
-                error.classList.add('show');
-                setTimeout(() => {
-                    input.classList.remove('error');
-                }, 300);
+                input.type = 'password';
+                toggle.textContent = '👁 показать';
             }
         }
         
