@@ -19883,12 +19883,83 @@
             }));
         }
         
-        // Сброс прогресса
+        // Сброс прогресса (всего курса)
         function resetProgress() {
             if (confirm('Сбросить весь прогресс и пройти курс заново?')) {
                 localStorage.removeItem('course-state-v3');
                 location.reload();
             }
+        }
+        
+        // Сброс отдельного теста с рандомизацией вопросов
+        function resetQuiz(quizId) {
+            const quiz = document.getElementById(quizId);
+            if (!quiz) return;
+            
+            // Сбросить состояние вопросов
+            const questions = quiz.querySelectorAll('.question');
+            questions.forEach(q => {
+                const options = q.querySelectorAll('.option');
+                options.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+                });
+            });
+            
+            // Перемешать вопросы
+            shuffleQuizQuestions(quizId);
+            
+            // Включить кнопку проверки
+            const checkBtn = quiz.querySelector('.btn-check');
+            if (checkBtn) checkBtn.disabled = false;
+            
+            // Скрыть результат и кнопку пересдачи
+            const resultDiv = document.getElementById('result-' + quizId);
+            if (resultDiv) {
+                resultDiv.innerHTML = '';
+                resultDiv.className = 'quiz-result';
+            }
+            
+            const retryBtn = quiz.querySelector('.btn-retry');
+            if (retryBtn) retryBtn.style.display = 'none';
+            
+            // Удалить результат из состояния
+            if (state.quizResults[quizId]) {
+                state.totalScore -= state.quizResults[quizId].correct;
+                delete state.quizResults[quizId];
+                updateProgress();
+                saveState();
+            }
+            
+            // Прокрутить к началу теста
+            quiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Перемешивание вопросов в тесте (алгоритм Фишера-Йетса)
+        function shuffleQuizQuestions(quizId) {
+            const quiz = document.getElementById(quizId);
+            if (!quiz) return;
+            
+            const questionsContainer = quiz;
+            const questions = Array.from(quiz.querySelectorAll('.question'));
+            
+            // Перемешиваем массив вопросов
+            for (let i = questions.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [questions[i], questions[j]] = [questions[j], questions[i]];
+            }
+            
+            // Находим первый элемент, перед которым стоят вопросы (header или первый вопрос)
+            const firstQuestion = quiz.querySelector('.question');
+            const insertBefore = firstQuestion;
+            
+            // Вставляем вопросы в новом порядке и обновляем нумерацию
+            questions.forEach((q, index) => {
+                const numSpan = q.querySelector('.question-number');
+                if (numSpan) {
+                    numSpan.textContent = (index + 1) + '.';
+                }
+                quiz.insertBefore(q, quiz.querySelector('.btn-check'));
+            });
         }
         
         // Подсчёт максимального количества баллов
@@ -20178,6 +20249,18 @@
             }
             
             quiz.querySelector('.btn-check').disabled = true;
+            
+            // Показать кнопку пересдачи теста
+            let retryBtn = quiz.querySelector('.btn-retry');
+            if (!retryBtn) {
+                retryBtn = document.createElement('button');
+                retryBtn.className = 'btn-retry';
+                retryBtn.innerHTML = '🔄 Пересдать этот тест';
+                retryBtn.onclick = function() { resetQuiz(quizId); };
+                retryBtn.style.cssText = 'margin-left: 10px; padding: 10px 20px; background: #ff9800; color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 14px;';
+                quiz.querySelector('.btn-check').parentNode.insertBefore(retryBtn, resultDiv);
+            }
+            retryBtn.style.display = 'inline-block';
             
             updateProgress();
             updateNavigation();
