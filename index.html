@@ -1195,6 +1195,10 @@
             <span class="nav-item-icon">📖</span>
             Введение
         </a>
+        <a class="nav-item internal-only" data-section="company-intro" onclick="showSection('company-intro')">
+            <span class="nav-item-icon">👋</span>
+            Представление компании
+        </a>
         <a class="nav-item internal-only" data-section="conditions" onclick="showSection('conditions')">
             <span class="nav-item-icon">💼</span>
             Условия работы
@@ -1567,9 +1571,93 @@
                 
                 <div class="section-nav">
                     <span></span>
-                    <button class="btn-nav primary" onclick="showSection('conditions')">
-                        Условия работы →
+                    <button class="btn-nav primary" onclick="showSection('company-intro')">
+                        Представление компании →
                     </button>
+                </div>
+            </section>
+            
+            <!-- ПРЕДСТАВЛЕНИЕ КОМПАНИИ (закрытый раздел) -->
+            <section class="section internal-only" id="company-intro">
+                <h1>👋 Представление компании</h1>
+                <p class="lead">Готовые шаблоны для первого контакта с клиентами. Копируй, адаптируй под себя, отправляй.</p>
+                
+                <div class="highlight" style="background: #e3f2fd; border-left-color: #2196f3;">
+                    <div class="highlight-title">📋 Как пользоваться шаблонами</div>
+                    <p>Эти тексты можно копировать и отправлять в мессенджеры (WhatsApp, Telegram) или письмом. Замени <code>[ИМЯ]</code> на своё имя, добавь свои контакты.</p>
+                </div>
+                
+                <h2>Короткое представление для строителя (первый контакт)</h2>
+                <p>Когда руководитель передал контакт клиента и нужно представиться:</p>
+                
+                <div class="card" style="border-left: 4px solid #4caf50; background: #f5f5f5;">
+                    <div class="card-title"><span class="card-icon">📝</span> Шаблон для копирования</div>
+                    <div style="background: #fff; padding: 16px; border-radius: 8px; font-family: inherit; white-space: pre-line; line-height: 1.6;">☀️ Добрый день!
+
+Это [ИМЯ] от Владимира Монастыренко.
+
+✌️ Мой руководитель звонил Вам по поводу работ по цоколю и перфокассет, передал мне в работу.
+
+С Вашего позволения, отправляю информацию о нас на случай, когда мы можем пригодиться. 👐
+
+🏭 Производим и поставляем кровельные материалы по всей России.
+
+🔧 Гнём любые изделия из тонколистового металла, красим, свариваем.
+
+📐 Не просто производство — разрабатываем узлы под ваши задачи.
+
+🛠️ Замер, техническая консультация.
+
+🌐 Подробнее: wtw.ru
+
+Я с удовольствием отвечу Вам на любые вопросы, в том числе по колпакам, трубам, отливам...
+
+Мои контакты:
+📞 +7 XXX XXX-XX-XX
+✉️ xxx@wtw.ru</div>
+                    <button onclick="copyToClipboard(this.previousElementSibling.innerText)" style="margin-top: 12px; padding: 8px 16px; background: #4caf50; color: #fff; border: none; border-radius: 4px; cursor: pointer;">📋 Скопировать текст</button>
+                </div>
+                
+                <div class="important-box" style="background: #fff3e0; border-color: #ff9800;">
+                    <strong>⚠️ Не забудь заменить:</strong>
+                    <ul style="margin-bottom: 0;">
+                        <li><code>[ИМЯ]</code> — на своё имя</li>
+                        <li>«по поводу работ по цоколю и перфокассет» — на реальную тему разговора руководителя</li>
+                        <li>Контакты — на свой телефон и почту</li>
+                    </ul>
+                </div>
+                
+                <h3>Почему этот шаблон работает</h3>
+                <div class="card">
+                    <div class="card-title"><span class="card-icon">🎯</span> Разбор структуры</div>
+                    <ul>
+                        <li><strong>☀️ Приветствие</strong> — тёплое, но без панибратства</li>
+                        <li><strong>Представление</strong> — кто ты и от кого</li>
+                        <li><strong>Контекст</strong> — напоминание о чём говорил руководитель</li>
+                        <li><strong>Польза</strong> — информация «на будущее» без навязывания</li>
+                        <li><strong>Что делаем</strong> — короткий список с эмодзи (легко читать)</li>
+                        <li><strong>Открытость</strong> — готовность ответить на вопросы</li>
+                        <li><strong>Контакты</strong> — телефон и почта</li>
+                    </ul>
+                </div>
+                
+                <div class="speech-modules">
+                    <div class="speech-modules-title">🎯 Альтернативные варианты</div>
+                    
+                    <div class="speech-item">
+                        <div class="speech-situation">Если нужно ещё короче (3 строки):</div>
+                        <div class="speech-text">«Добрый день! Это [ИМЯ] от Владимира Монастыренко по [теме]. Мы производим металлоизделия для кровли и фасада — колпаки, трубы, отливы, кассеты. Если будут вопросы — пишите, отвечу.»</div>
+                    </div>
+                    
+                    <div class="speech-item">
+                        <div class="speech-situation">Если контакт «холодный» (сам нашёл):</div>
+                        <div class="speech-text">«Добрый день! Меня зовут [ИМЯ], компания Монастыренко — производство кровельных и фасадных изделий из металла. Увидел ваш объект на [источник] — если нужны колпаки, трубы, кассеты — рад помочь. Подробнее: wtw.ru»</div>
+                    </div>
+                </div>
+                
+                <div class="section-nav">
+                    <button class="btn-nav" onclick="showSection('intro')">← Введение</button>
+                    <button class="btn-nav primary" onclick="showSection('conditions')">Условия работы →</button>
                 </div>
             </section>
             
@@ -19846,6 +19934,23 @@
                     icon.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
                 }
             }
+        }
+        
+        // Копирование текста в буфер обмена
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Показать уведомление
+                const btn = event.target;
+                const originalText = btn.innerText;
+                btn.innerText = '✅ Скопировано!';
+                btn.style.background = '#2e7d32';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = '#4caf50';
+                }, 2000);
+            }).catch(err => {
+                alert('Не удалось скопировать. Выделите текст вручную.');
+            });
         }
         
         // Переключение разделов
