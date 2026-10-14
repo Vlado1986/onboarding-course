@@ -3051,7 +3051,7 @@
                         <span>⚙️ 1. Настройка авторасчёта стоимости заказов (Астра Раскрой)</span>
                         <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
                     </div>
-                    <div class="accordion-content" style="display: none; background: #fff8e1; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #ffe0b2; border-top: none;">
+                    <div class="setup-content" style="display: none; background: #fff8e1; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #ffe0b2; border-top: none;">
                         <p><strong>Зачем:</strong> после настройки система автоматически рассчитывает стоимость заказов. Без этого — ручной расчёт каждого заказа.</p>
                         
                         <p style="margin-top: 12px;"><strong>Алгоритм настройки:</strong></p>
@@ -3102,7 +3102,7 @@
                         <span>⚙️ 2. Настройка работы с 1С CRM</span>
                         <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
                     </div>
-                    <div class="accordion-content" style="display: none; background: #fff8e1; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #ffe0b2; border-top: none;">
+                    <div class="setup-content" style="display: none; background: #fff8e1; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #ffe0b2; border-top: none;">
                         <p><strong>Зачем:</strong> включает CRM-модуль, помощник нового клиента и привязку почты. Без этого — нет интересов, нет переписки в карточке клиента.</p>
                         
                         <p style="margin-top: 12px;"><strong>Алгоритм настройки:</strong></p>
@@ -6644,7 +6644,7 @@
                             <span>📖 Ключевые выдержки из СП 7.13130.2013 (дымоходы и разделки)</span>
                             <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
                         </div>
-                        <div class="accordion-content" style="display: none; background: #f3e5f5; border-radius: 0 0 8px 8px; padding: 1.5rem; margin-top: -4px; border: 1px solid #ce93d8; border-top: none; max-height: 500px; overflow-y: auto; font-size: 0.9em;">
+                        <div class="setup-content" style="display: none; background: #f3e5f5; border-radius: 0 0 8px 8px; padding: 1.5rem; margin-top: -4px; border: 1px solid #ce93d8; border-top: none; max-height: 500px; overflow-y: auto; font-size: 0.9em;">
                             <p><strong>Раздел 5.26.</strong> Дымовые трубы должны быть вертикальными, без уступов, из несгораемых материалов.</p>
                             <p><strong>Раздел 5.27.</strong> Толщина стенки кирпичного дымохода — не менее 120 мм. Расстояние от наружной поверхности дымохода до горючих конструкций — не менее <strong>130 мм</strong> (при толщине стенки 120 мм).</p>
                             <p><strong>Раздел 5.28.</strong> Разделки должны устраиваться при проходе дымоходов через горючие перекрытия. Толщина разделки — не менее <strong>500 мм</strong> от внутренней поверхности дымохода до горючих конструкций.</p>
@@ -20754,7 +20754,7 @@
         // Переключение accordion
         function toggleAccordion(header) {
             const item = header.parentElement;
-            const content = header.nextElementSibling || item.querySelector('.accordion-content');
+            const content = header.nextElementSibling || item.querySelector('.accordion-content') || item.querySelector('.setup-content');
             const icon = header.querySelector('.accordion-icon');
             
             // Для accordion-item (старая структура)
