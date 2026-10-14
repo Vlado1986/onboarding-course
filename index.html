@@ -3040,6 +3040,106 @@
                 <h1>💻 Работа в 1С</h1>
                 <p class="lead">Алгоритмы работы с системой 1С:Управление торговлей. Все действия менеджера — от создания партнёра до проверки оплаты.</p>
                 
+                <!-- ═══ ПЕРВИЧНАЯ НАСТРОЙКА ═══ -->
+                <div class="important-box" style="background: #fff3e0; border-color: #ff9800; margin-bottom: 2rem;">
+                    <strong style="font-size: 1.1em;">⚙️ ПЕРВИЧНАЯ НАСТРОЙКА — выполнить при подключении нового сотрудника</strong>
+                    <p style="margin-top: 10px;">Два обязательных шага перед началом работы. Без них не работает авторасчёт стоимости и CRM.</p>
+                </div>
+                
+                <div class="accordion" style="margin-bottom: 1.5rem;">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600;">
+                        <span>⚙️ 1. Настройка авторасчёта стоимости заказов (Астра Раскрой)</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="accordion-content" style="display: none; background: #fff8e1; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #ffe0b2; border-top: none;">
+                        <p><strong>Зачем:</strong> после настройки система автоматически рассчитывает стоимость заказов. Без этого — ручной расчёт каждого заказа.</p>
+                        
+                        <p style="margin-top: 12px;"><strong>Алгоритм настройки:</strong></p>
+                        <ol style="margin-left: 1rem;">
+                            <li style="margin-bottom: 12px;">
+                                <strong>Открыть Астра Раскрой 5</strong>
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                <strong>Обзор папок</strong> → выбрать путь:<br>
+                                <code style="background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #ddd; font-size: 0.9em;">Библиотека → Документы → документы → Ок</code>
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                В открытой Астре: <strong>Сервис → Параметры</strong>
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                Левое меню → <strong>«Расположение»</strong><br>
+                                Папка для файлов обмена данными:<br>
+                                <code style="background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #ddd; font-size: 0.9em;">SQL(E) → DATA → AstraExchange → !AstraEx → OK</code>
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                Левое меню → <strong>«При запуске»</strong><br>
+                                ✅ Обработать параметры командной строки
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                Левое меню → <strong>«Действия по умолчанию»</strong><br>
+                                ✅ Рассчитать все остатки при выполнении раскроя<br>
+                                ✅ Закрыть программу после завершения раскроя<br>
+                                ✅ Не показывать окно «Важный совет»
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                Левое меню → <strong>«При выходе»</strong><br>
+                                ✅ Не сохранять заказ<br>
+                                ✅ Экспортировать файл
+                            </li>
+                            <li>
+                                Нажать <strong>Ок</strong>
+                            </li>
+                        </ol>
+                        
+                        <div class="highlight" style="background: #e8f5e9; border-left-color: #4caf50; margin-top: 12px;">
+                            <p style="margin: 0;"><strong>✅ Готово!</strong> После этого авторасчёт стоимости работает. При создании заказа в 1С стоимость рассчитается автоматически.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion" style="margin-bottom: 2rem;">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); color: white; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600;">
+                        <span>⚙️ 2. Настройка работы с 1С CRM</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="accordion-content" style="display: none; background: #fff8e1; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #ffe0b2; border-top: none;">
+                        <p><strong>Зачем:</strong> включает CRM-модуль, помощник нового клиента и привязку почты. Без этого — нет интересов, нет переписки в карточке клиента.</p>
+                        
+                        <p style="margin-top: 12px;"><strong>Алгоритм настройки:</strong></p>
+                        <ol style="margin-left: 1rem;">
+                            <li style="margin-bottom: 12px;">
+                                Боковое меню → <strong>НСИ и Администрирование</strong>
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                <strong>Администрирование</strong> → <strong>Настройки пользователей и прав</strong>
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                <strong>Пользователи</strong> → выбрать нужного пользователя
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                Открыть <strong>Персональные настройки</strong>
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                Вкладка <strong>«Настройки»</strong>:<br>
+                                ✅ Использовать систему 1С CRM → <strong>Да</strong><br>
+                                ✅ Основная организация → <strong>ООМ</strong><br>
+                                ✅ Использовать помощник нового клиента → <strong>Да</strong>
+                            </li>
+                            <li style="margin-bottom: 12px;">
+                                Вкладка <strong>«Почта»</strong>:<br>
+                                ✅ Закрывать письмо-основание после отправки ответа
+                            </li>
+                            <li>
+                                <strong>Записать и закрыть</strong>
+                            </li>
+                        </ol>
+                        
+                        <div class="highlight" style="background: #e8f5e9; border-left-color: #4caf50; margin-top: 12px;">
+                            <p style="margin: 0;"><strong>✅ Готово!</strong> CRM активирована. Теперь доступны интересы, помощник нового клиента, переписка в карточке.</p>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="highlight">
                             <div class="highlight-title">📋 Содержание раздела</div>
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 12px;">
@@ -6865,12 +6965,14 @@
                     
                     <p><strong>Плюсы системы Gable:</strong></p>
                     <ul>
-                        <li><strong>Нет ограничений по высоте</strong> — главное преимущество</li>
-                        <li>Премиальный внешний вид, рельефная текстура</li>
-                        <li>Лучшая защита от затекания воды (внахлёст)</li>
-                        <li>Простая замена повреждённого сегмента</li>
-                        <li>Компенсация температурных расширений</li>
-                        <li>Идеально для фронтонов и высоких карнизов</li>
+                        <li><strong>Перекрытие любой высоты</strong> — сегменты набираются до нужного размера</li>
+                        <li><strong>Не изменяется геометрия</strong> при температурном расширении</li>
+                        <li><strong>Готовый узел в коньке</strong> — не нужно придумывать примыкание</li>
+                        <li><strong>Доставка легковой машиной</strong> — компактные сегменты</li>
+                        <li><strong>Монтаж одним человеком</strong>, до или после кровли</li>
+                        <li><strong>Без подрезки на объекте</strong> — всё готово</li>
+                        <li>Ремонтопригодность — замена одной кассеты</li>
+                        <li>Калькулятор считает комплектацию за менеджера</li>
                     </ul>
                     
                     <p><strong>Когда рекомендовать Gable:</strong></p>
@@ -15095,16 +15197,43 @@
                 </div>
                 
                 <div class="card" style="border-left: 4px solid #4caf50;">
-                    <div class="card-title"><span class="card-icon">✅</span> Преимущества Gable</div>
+                    <div class="card-title"><span class="card-icon">✅</span> Преимущества системы Gable</div>
+                    
+                    <h4>Сегментные изделия:</h4>
                     <ul>
-                        <li><strong>Различный дизайн лобовой доски</strong> — имитация дерева, гладкий металл, разные профили</li>
-                        <li><strong>Без подрезки на объекте</strong> — панели поставляются готовыми к монтажу</li>
-                        <li><strong>Ремонтопригодность</strong> — любую кассету можно заменить отдельно, не разбирая всю систему</li>
-                        <li><strong>Простота доставки</strong> — компактные панели, не ломаются при транспортировке</li>
-                        <li><strong>Монтаж одним человеком</strong> — лёгкие элементы, защёлкиваются без помощника</li>
-                        <li><strong>Перекрытие любой высоты</strong> — кассетная система набирается до нужного размера</li>
-                        <li><strong>Кассетная система</strong> — панели соединяются внахлёст, герметичный стык без щелей</li>
-                        <li><strong>Металл, не пластик</strong> — долговечность и премиальный вид</li>
+                        <li><strong>Доставка легковой машиной</strong> — компактные сегменты, не нужна газель</li>
+                        <li><strong>Перекрытие любой высоты лобовой доски</strong> — кассеты набираются до нужного размера</li>
+                        <li><strong>Не изменяется геометрия при температурном расширении</strong> — сегменты компенсируют деформации</li>
+                        <li><strong>Готовый узел в коньке</strong> — не нужно придумывать примыкание</li>
+                    </ul>
+                    
+                    <h4>Простота монтажа:</h4>
+                    <ul>
+                        <li><strong>Без подрезки на объекте</strong> — панели поставляются готовыми</li>
+                        <li><strong>Инструкция на доступном языке</strong> — разберётся любой</li>
+                        <li><strong>Монтаж одним человеком</strong> — лёгкие элементы, не нужен помощник</li>
+                        <li><strong>Ремонтопригодность</strong> — любую кассету можно заменить отдельно</li>
+                        <li><strong>Установка до или после монтажа кровли</strong> — гибкость по срокам работ</li>
+                    </ul>
+                    
+                    <h4>Для менеджеров:</h4>
+                    <ul>
+                        <li><strong>Калькулятор считает за вас</strong> — не нужно вручную подбирать комплектацию</li>
+                        <li><strong>Высокая маржинальность</strong> — дилерская скидка 50%</li>
+                    </ul>
+                </div>
+                
+                <div class="card" style="border-left: 4px solid #f44336;">
+                    <div class="card-title"><span class="card-icon">❌</span> Чем J-фаска (металл/пластик) хуже нашей системы</div>
+                    <ul>
+                        <li><strong>Нет комплекта</strong> — детали считаются и собираются по частям</li>
+                        <li><strong>Монтаж только до установки кровли</strong> — нельзя доделать потом</li>
+                        <li><strong>Ограничения по высоте</strong> — максимум 200-250 мм, выше — стыки</li>
+                        <li><strong>Видимые соединения</strong> — швы заметны, со временем расходятся</li>
+                        <li><strong>Пластиковые планки выцветают</strong> — через 3-5 лет теряют цвет</li>
+                        <li><strong>Пластик искажается</strong> из-за овальных отверстий при нагреве</li>
+                        <li><strong>Монтаж минимум двумя людьми</strong> — длинные планки неудобны</li>
+                        <li><strong>Доставка газелью</strong> — длина 2-3 метра не влезет в легковую</li>
                     </ul>
                 </div>
                 
@@ -15149,11 +15278,13 @@
                 
                 <!-- ═══ МЕТАЛЛИЧЕСКИЕ ЛОБОВЫЕ ═══ -->
                 <h2>🔧 Металлические лобовые системы</h2>
-                <p>Наше производство. Лобовые планки, карнизные планки, софиты — всё из окрашенного металла точно под ваш объект.</p>
+                <p>Наше производство. Мы не просто делаем лобовые из металла — <strong>мы создаём дизайн</strong>. Разрабатываем рисунки, прокатываем несколько видов рёбер жёсткости, подбираем профиль под архитектуру объекта. Каждая лобовая система — это индивидуальное решение, а не стандартная планка.</p>
                 
                 <div class="card" style="border-left: 4px solid #4caf50;">
                     <div class="card-title"><span class="card-icon">✅</span> Преимущества металла</div>
                     <ul>
+                        <li><strong>Собственный дизайн</strong> — разрабатываем рисунки и профили под конкретный объект</li>
+                        <li><strong>Рёбра жёсткости</strong> — несколько видов прокатки: планка не «играет» на длинных пролётах</li>
                         <li><strong>Любой цвет RAL</strong> — точное совпадение с кровлей и фасадом</li>
                         <li><strong>Любой размер</strong> — делаем под конкретный объект, не стандарт</li>
                         <li><strong>Премиальный вид</strong> — металл выглядит дороже пластика</li>
@@ -15197,15 +15328,19 @@
                     <table class="spec-table">
                         <tr><th>Параметр</th><th>Gable (наше)</th><th>J-фаска Grand Line</th></tr>
                         <tr><td>Производство</td><td style="background:#e8f5e9;"><strong>Собственное</strong></td><td>Grand Line</td></tr>
+                        <tr><td>Комплектация</td><td style="background:#e8f5e9;"><strong>Готовый комплект</strong></td><td>Детали считаются по частям</td></tr>
                         <tr><td>Дилерская скидка</td><td style="background:#e8f5e9;"><strong>50%</strong></td><td>~30%</td></tr>
-                        <tr><td>Маржа дилера</td><td style="background:#e8f5e9;"><strong>Выше</strong></td><td>Средняя</td></tr>
-                        <tr><td>Палитра цветов</td><td style="background:#e8f5e9;"><strong>Любой RAL</strong></td><td>Стандартные RAL</td></tr>
-                        <tr><td>Размеры</td><td style="background:#e8f5e9;"><strong>Любые, под заказ</strong></td><td>Типовые</td></tr>
-                        <tr><td>Высота лобовой</td><td style="background:#e8f5e9;"><strong>Любая (кассетная система)</strong></td><td>До 250 мм</td></tr>
-                        <tr><td>Монтаж</td><td style="background:#e8f5e9;"><strong>Одним человеком, защёлкивается</strong></td><td>Нужна подгонка</td></tr>
+                        <tr><td>Расчёт</td><td style="background:#e8f5e9;"><strong>Калькулятор считает за вас</strong></td><td>Ручной подбор</td></tr>
+                        <tr><td>Высота лобовой</td><td style="background:#e8f5e9;"><strong>Любая (сегментная система)</strong></td><td>До 250 мм</td></tr>
+                        <tr><td>Температурное расширение</td><td style="background:#e8f5e9;"><strong>Геометрия не меняется</strong></td><td>Искажение пластика</td></tr>
+                        <tr><td>Узел в коньке</td><td style="background:#e8f5e9;"><strong>Готовый</strong></td><td>Нужно придумывать</td></tr>
+                        <tr><td>Доставка</td><td style="background:#e8f5e9;"><strong>Легковой машиной</strong></td><td>Газелью (длина 2-3 м)</td></tr>
+                        <tr><td>Монтаж</td><td style="background:#e8f5e9;"><strong>Одним человеком</strong></td><td>Минимум двое</td></tr>
+                        <tr><td>Когда монтировать</td><td style="background:#e8f5e9;"><strong>До или после кровли</strong></td><td>Только до кровли</td></tr>
+                        <tr><td>Подрезка на объекте</td><td style="background:#e8f5e9;"><strong>Не нужна</strong></td><td>Нужна подгонка</td></tr>
+                        <tr><td>Видимость соединений</td><td style="background:#e8f5e9;"><strong>Скрытые стыки</strong></td><td>Видимые швы</td></tr>
                         <tr><td>Ремонтопригодность</td><td style="background:#e8f5e9;"><strong>Заменяется одна кассета</strong></td><td>Менять всю планку</td></tr>
                         <tr><td>Гарантия</td><td style="background:#e8f5e9;"><strong>Бессрочная</strong></td><td>Производителя</td></tr>
-                        <tr><td>Внешний вид</td><td style="background:#e8f5e9;"><strong>Премиум, разные дизайны</strong></td><td>Стандартный</td></tr>
                         <tr><td>Срок поставки</td><td>3-5 дней</td><td style="background:#e8f5e9;">Со склада</td></tr>
                     </table>
                 </div>
@@ -15383,6 +15518,20 @@
                         <li><strong>От 3 дней</strong> — быстрое изготовление</li>
                         <li><strong>Бессрочная гарантия</strong> — уверенность в качестве</li>
                     </ul>
+                </div>
+                
+                <div class="card" style="border-left: 4px solid #9c27b0;">
+                    <div class="card-title"><span class="card-icon">🎯</span> Высокая точность — метод микронасечек</div>
+                    <p>Мы изготавливаем доборные элементы с <strong>высокой точностью</strong>. Разметка ведётся не фломастерами, а <strong>методом микронасечек</strong> — точечных меток, невидимых на готовом изделии.</p>
+                    <div class="info-block" style="margin-top: 12px;">
+                        <table class="spec-table">
+                            <tr><th>Параметр</th><th>Разметка фломастером</th><th>Наши микронасечки</th></tr>
+                            <tr><td>Погрешность</td><td>до 3 мм</td><td style="background:#e8f5e9;"><strong>до 1 мм</strong></td></tr>
+                            <tr><td>Следы на изделии</td><td>Видны линии и точки</td><td style="background:#e8f5e9;">Не видны</td></tr>
+                            <tr><td>Стыковка элементов</td><td>Зазоры, подгонка на месте</td><td style="background:#e8f5e9;">Точное совпадение</td></tr>
+                        </table>
+                    </div>
+                    <p style="margin-top: 12px;"><strong>Что это даёт клиенту:</strong> идеальные стыки, минимальные зазоры, аккуратный внешний вид без доработки на объекте. Монтажнику не нужно подгонять — всё совпадает.</p>
                 </div>
                 
                 <h2>Расчёт количества планок</h2>
