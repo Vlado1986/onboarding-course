@@ -1215,6 +1215,10 @@
             <span class="nav-item-icon">📋</span>
             Инструкции к должности
         </a>
+        <a class="nav-item internal-only" data-section="team" onclick="showSection('team')">
+            <span class="nav-item-icon">👥</span>
+            Мы. Команда
+        </a>
         
         <a class="nav-item internal-only" data-section="internal-1c" onclick="showSection('internal-1c')">
             <span class="nav-item-icon">💻</span>
@@ -3341,6 +3345,40 @@
                         <div class="highlight" style="background: #e8f5e9; border-left-color: #4caf50; margin-top: 12px;">
                             <p style="margin: 0;"><strong>✅ Готово!</strong> CRM активирована. Теперь доступны интересы, помощник нового клиента, переписка в карточке.</p>
                         </div>
+                    </div>
+                </div>
+                
+                <!-- ═══ ПРАВИЛА ЦЕНООБРАЗОВАНИЯ ═══ -->
+                <div class="important-box" style="background: #ffebee; border-color: #f44336; margin-bottom: 1.5rem;">
+                    <strong style="font-size: 1.1em;">🚫 ПРАВИЛА ЦЕНООБРАЗОВАНИЯ — запомнить как «Отче наш»</strong>
+                    <div style="margin-top: 12px;">
+                        <p><strong>1. Ручное выставление стоимости ЗАПРЕЩЕНО.</strong></p>
+                        <p style="margin-top: 4px;">Стоимость изделий всегда формируется только через <strong>авторасчёт</strong> (Астра Раскрой). Нельзя вписывать цену руками — даже если «знаешь, сколько стоит».</p>
+                        
+                        <p style="margin-top: 12px;"><strong>2. Корректировка цены — только ручной скидкой.</strong></p>
+                        <p style="margin-top: 4px;">Если нужно изменить стоимость (скидка клиенту, акция, особые условия) — делаем это <strong>только через поле «Ручная скидка»</strong> в строке заказа. Не через редактирование цены!</p>
+                        
+                        <p style="margin-top: 12px;"><strong>3. После ЛЮБОГО изменения счёта — прогнать авторасчёт заново.</strong></p>
+                        <p style="margin-top: 4px;">Добавил строку, удалил строку, изменил размеры, поменял количество — <strong>обязательно запусти авторасчёт</strong> после последних изменений в строках номенклатуры. Иначе стоимость не пересчитается и будет расхождение с раскроем.</p>
+                    </div>
+                    <p style="margin-top: 12px; color: #d32f2f;"><strong>Нарушение этих правил = ошибки в себестоимости, убытки на заказе, проблемы с раскроем.</strong></p>
+                </div>
+                
+                <!-- ═══ КОРРЕКТИРОВКИ МЕТАЛЛА ═══ -->
+                <div class="card" style="border-left: 4px solid #9c27b0; margin-bottom: 1.5rem;">
+                    <div class="card-title"><span class="card-icon">🔧</span> Корректировки металла — списание и оприходование</div>
+                    <p>При работе с листовым металлом (списание остатков, оприходование новых поставок) — <strong>обязательно проверяй остатки через отчёт «Листики»</strong>.</p>
+                    
+                    <p style="margin-top: 12px;"><strong>Алгоритм после списания или оприходования:</strong></p>
+                    <ol>
+                        <li>Провести документ списания / оприходования</li>
+                        <li>Открыть отчёт <strong>«Листики»</strong></li>
+                        <li>Проверить, что <strong>ни один металл не ушёл в минус</strong></li>
+                        <li>Если минус — найти причину (ошибка в документе, не проведён приход, пересортица)</li>
+                    </ol>
+                    
+                    <div class="warning-box" style="margin-top: 12px;">
+                        <p><strong>⚠️ Металл в минусе = проблема.</strong> Если на складе минусовой остаток — раскрой будет считать, что металла нет, заказы встанут. Всегда проверяй после любых движений.</p>
                     </div>
                 </div>
                 
@@ -5798,6 +5836,44 @@
                 
                 <div class="section-nav">
                     <button class="btn-nav" onclick="showSection('measurement')">← Правила замера</button>
+                    <button class="btn-nav primary" onclick="showSection('team')">Команда →</button>
+                </div>
+            </section>
+            
+            <!-- МЫ. КОМАНДА -->
+            <section class="section internal-only" id="team">
+                <h1>👥 Мы. Команда</h1>
+                <p class="lead">Контакты коллег. Офис и производство.</p>
+                
+                <h2>🏢 Офис</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 1rem 0;">
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="font-weight: 600; margin-bottom: 4px;">Монастыренко Владимир Александрович</div><a href="tel:+79219954308" style="color: var(--primary); text-decoration: none;">+7 921 995-43-08</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="font-weight: 600; margin-bottom: 4px;">Монастыренко Кристина Николаевна</div><a href="tel:+79217434517" style="color: var(--primary); text-decoration: none;">+7 921 743-45-17</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="font-weight: 600; margin-bottom: 4px;">Книжников Сергей Васильевич</div><a href="tel:+79219043907" style="color: var(--primary); text-decoration: none;">+7 921 904-39-07</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="font-weight: 600; margin-bottom: 4px;">Борзова Наталия Валерьевна</div><a href="tel:+79213320653" style="color: var(--primary); text-decoration: none;">+7 921 332-06-53</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="font-weight: 600; margin-bottom: 4px;">Горбунов Виталий Анатольевич</div><a href="tel:+79817337169" style="color: var(--primary); text-decoration: none;">+7 981 733-71-69</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="font-weight: 600; margin-bottom: 4px;">Иванов Константин Вячеславович</div><a href="tel:+79995156055" style="color: var(--primary); text-decoration: none;">+7 999 515-60-55</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="font-weight: 600; margin-bottom: 4px;">Крылов Евгений Анатольевич</div><a href="tel:+79921626072" style="color: var(--primary); text-decoration: none;">+7 992 162-60-72</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="font-weight: 600; margin-bottom: 4px;">Мараков Тимофей Сергеевич</div><a href="tel:+79939631579" style="color: var(--primary); text-decoration: none;">+7 993 963-15-79</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="font-weight: 600; margin-bottom: 4px;">Жаренко Даниил Сергеевич</div><a href="tel:+79531705777" style="color: var(--primary); text-decoration: none;">+7 953 170-57-77</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="font-weight: 600; margin-bottom: 4px;">Бекренев Дмитрий Олегович</div><a href="tel:+79215570018" style="color: var(--primary); text-decoration: none;">+7 921 557-00-18</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06);"><div style="font-weight: 600; margin-bottom: 4px;">Гертер Екатерина Александровна</div><a href="tel:+79502146389" style="color: var(--primary); text-decoration: none;">+7 950 214-63-89</a></div>
+                </div>
+                
+                <h2>🏭 Производство</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin: 1rem 0;">
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 3px solid #ff9800;"><div style="font-weight: 600; margin-bottom: 4px;">Алексеев Геннадий Викторович</div><a href="tel:+79934898700" style="color: var(--primary); text-decoration: none;">+7 993 489-87-00</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 3px solid #ff9800;"><div style="font-weight: 600; margin-bottom: 4px;">Абутеев Денис Валерьевич</div><a href="tel:+79992236669" style="color: var(--primary); text-decoration: none;">+7 999 223-66-69</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 3px solid #ff9800;"><div style="font-weight: 600; margin-bottom: 4px;">Бахриев Азамджон Зиеевич</div><a href="tel:+79811317919" style="color: var(--primary); text-decoration: none;">+7 981 131-79-19</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 3px solid #ff9800;"><div style="font-weight: 600; margin-bottom: 4px;">Королев Антон Алексеевич</div><a href="tel:+79111309815" style="color: var(--primary); text-decoration: none;">+7 911 130-98-15</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 3px solid #ff9800;"><div style="font-weight: 600; margin-bottom: 4px;">Магомедов Шамиль Хизриевич</div><a href="tel:+79633733375" style="color: var(--primary); text-decoration: none;">+7 963 373-33-75</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 3px solid #ff9800;"><div style="font-weight: 600; margin-bottom: 4px;">Минченко Игорь Игоревич</div><a href="tel:+79149030260" style="color: var(--primary); text-decoration: none;">+7 914 903-02-60</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 3px solid #ff9800;"><div style="font-weight: 600; margin-bottom: 4px;">Суханов Петр Алексеевич</div><a href="tel:+79214332949" style="color: var(--primary); text-decoration: none;">+7 921 433-29-49</a></div>
+                    <div style="background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border-left: 3px solid #ff9800;"><div style="font-weight: 600; margin-bottom: 4px;">Ткачев Павел Александрович</div><a href="tel:+79650380250" style="color: var(--primary); text-decoration: none;">+7 965 038-02-50</a></div>
+                </div>
+                
+                <div class="section-nav">
+                    <button class="btn-nav" onclick="showSection('job-instructions')">← Инструкции к должности</button>
                     <button class="btn-nav primary" onclick="showSection('internal-1c')">Работа в 1С →</button>
                 </div>
             </section>
