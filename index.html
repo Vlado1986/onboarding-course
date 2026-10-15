@@ -1166,6 +1166,12 @@
         <button class="btn-reset" onclick="resetProgress()">🔄 Пройти заново</button>
         <button class="btn-reset" onclick="showReport()" style="margin-top: 5px;">📊 Мои результаты</button>
         
+        <!-- Поиск по курсу -->
+        <div style="margin: 10px 15px; position: relative;">
+            <input type="text" id="course-search" placeholder="🔍 Поиск по курсу..." oninput="searchCourse(this.value)" style="width: 100%; padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85em; background: var(--bg); color: var(--text); box-sizing: border-box;">
+            <div id="search-results" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid var(--border); border-radius: 0 0 8px 8px; max-height: 300px; overflow-y: auto; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"></div>
+        </div>
+        
         <div class="nav-section">Для партнёров</div>
         <a class="nav-item" data-section="company-about" onclick="showSection('company-about')">
             <span class="nav-item-icon">🏢</span>
@@ -1264,7 +1270,7 @@
         </a>
         <a class="nav-item our-production" data-section="our-stoppers" onclick="showSection('our-stoppers')">
             <span class="nav-item-icon">🛑</span>
-            Стопперы
+            Снегозадержатели (снегорезы)
         </a>
         <a class="nav-item our-production" data-section="our-ppu-pipe" onclick="showSection('our-ppu-pipe')">
             <span class="nav-item-icon">🔥</span>
@@ -4879,6 +4885,16 @@
                     <div id="internal-ai">
                         <h1>🤖 Работа с ИИ (Kiro)</h1>
                         <p class="lead">ИИ-ассистент Kiro помогает работать быстрее: анализирует данные из 1С, готовит отчёты, отвечает на вопросы по продукции и процессам. Это не замена, а инструмент — как калькулятор для бухгалтера.</p>
+                        
+                        <div style="text-align: center; margin: 1.5rem 0;">
+                            <a href="https://kiro.wtw.ru" target="_blank" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; text-decoration: none; border-radius: 12px; font-size: 1.1em; font-weight: 600; box-shadow: 0 4px 15px rgba(102,126,234,0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🤖 Перейти к Kiro</a>
+                        </div>
+                        
+                        <div class="important-box" style="background: #e3f2fd; border-color: #2196f3;">
+                            <strong>📌 Как работать с Kiro</strong>
+                            <p style="margin-top: 8px;">Kiro работает в <strong>своём отдельном диалоговом окне</strong> (чате). Это не часть 1С и не часть курса — это самостоятельное приложение. Нажмите кнопку выше, откроется окно чата. Пишите вопрос обычным текстом, как в мессенджере — Kiro ответит.</p>
+                            <p style="margin-top: 8px;">Каждый новый вопрос — новый диалог. Kiro помнит контекст в рамках одного диалога, но не помнит, что вы спрашивали вчера.</p>
+                        </div>
                         
                         <div class="highlight">
                             <div class="highlight-title">💡 Что такое Kiro</div>
@@ -21619,6 +21635,59 @@
         
         // Инициализация
         document.addEventListener('DOMContentLoaded', loadState);
+        
+        // === ПОИСК ПО КУРСУ ===
+        function searchCourse(query) {
+            const resultsDiv = document.getElementById('search-results');
+            if (!query || query.length < 2) {
+                resultsDiv.style.display = 'none';
+                return;
+            }
+            
+            const sections = document.querySelectorAll('.section');
+            const results = [];
+            const q = query.toLowerCase();
+            
+            sections.forEach(section => {
+                const id = section.id;
+                const h1 = section.querySelector('h1');
+                const title = h1 ? h1.textContent : id;
+                const text = section.textContent.toLowerCase();
+                
+                if (text.includes(q)) {
+                    // Найдём контекст — фрагмент текста вокруг совпадения
+                    const idx = text.indexOf(q);
+                    const start = Math.max(0, idx - 40);
+                    const end = Math.min(text.length, idx + q.length + 60);
+                    let snippet = section.textContent.substring(start, end).trim();
+                    if (start > 0) snippet = '...' + snippet;
+                    if (end < text.length) snippet = snippet + '...';
+                    
+                    results.push({ id, title, snippet });
+                }
+            });
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<div style="padding: 12px; color: #999; font-size: 0.85em;">Ничего не найдено</div>';
+            } else {
+                resultsDiv.innerHTML = results.slice(0, 8).map(r => 
+                    `<div onclick="showSection('${r.id}'); document.getElementById('search-results').style.display='none'; document.getElementById('course-search').value='';" style="padding: 10px 12px; cursor: pointer; border-bottom: 1px solid #eee; font-size: 0.85em;" onmouseover="this.style.background='#f0f0f0'" onmouseout="this.style.background='#fff'">
+                        <strong style="color: var(--primary);">${r.title}</strong>
+                        <div style="color: #666; margin-top: 2px; font-size: 0.9em;">${r.snippet}</div>
+                    </div>`
+                ).join('');
+            }
+            resultsDiv.style.display = 'block';
+        }
+        
+        // Закрытие поиска по клику вне
+        document.addEventListener('click', function(e) {
+            const sr = document.getElementById('search-results');
+            const si = document.getElementById('course-search');
+            if (sr && si && !sr.contains(e.target) && e.target !== si) {
+                sr.style.display = 'none';
+            }
+        });
         
         // === УМНЫЕ ТУЛТИПЫ ===
         document.addEventListener('DOMContentLoaded', function() {
