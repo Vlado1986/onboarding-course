@@ -3404,13 +3404,15 @@
                     
                     <div class="important-box" style="background: #fff3e0; border-color: #ff9800; margin-top: 12px;">
                         <strong>⚠️ Как считается время переналадки</strong>
-                        <p style="margin-top: 8px;">Время на переналадку переносится на <strong>сборку</strong> и делится на количество изделий в партии.</p>
+                        <p style="margin-top: 8px;">Переналадка добавляется <strong>к каждой операции отдельно</strong> и делится на количество изделий в партии.</p>
                         <p style="margin-top: 8px;"><strong>Пример:</strong> заказ 10 колпаков.</p>
-                        <ul>
-                            <li>Переналадка: 20 + 10 + 10 = 40 мин на всю партию</li>
-                            <li>На 1 изделие: 40 ÷ 10 = <strong>4 мин переналадки на колпак</strong></li>
-                            <li>Итого на 1 колпак: 4 мин (переналадка) + 40 + 15 + 15 = <strong>74 мин</strong></li>
-                        </ul>
+                        <table class="spec-table" style="margin-top: 8px;">
+                            <tr><th>Операция</th><th>Переналадка на партию</th><th>На 1 шт (переналадка)</th><th>На 1 шт (изготовление)</th><th>Итого на 1 шт</th></tr>
+                            <tr><td>Разметка</td><td>20 мин</td><td>20 ÷ 10 = 2 мин</td><td>40 мин</td><td><strong>42 мин</strong></td></tr>
+                            <tr><td>Гибка</td><td>10 мин</td><td>10 ÷ 10 = 1 мин</td><td>15 мин</td><td><strong>16 мин</strong></td></tr>
+                            <tr><td>Сборка</td><td>10 мин</td><td>10 ÷ 10 = 1 мин</td><td>15 мин</td><td><strong>16 мин</strong></td></tr>
+                            <tr style="background: #e8f5e9;"><td colspan="4"><strong>Итого на 1 колпак:</strong></td><td><strong>74 мин</strong></td></tr>
+                        </table>
                         <p style="margin-top: 8px; color: #e65100;"><strong>Важно:</strong> на сборку ложится столько времени переналадки, сколько сотрудников задействовано в процессе. Если над сборкой работают 2 человека — переналадка каждого учитывается отдельно.</p>
                     </div>
                 </div>
