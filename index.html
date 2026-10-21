@@ -3382,6 +3382,39 @@
                     </div>
                 </div>
                 
+                <!-- ═══ ВРЕМЯ ПРОИЗВОДСТВА ═══ -->
+                <div class="card" style="border-left: 4px solid #2196f3; margin-bottom: 1.5rem;">
+                    <div class="card-title"><span class="card-icon">⏱️</span> Время производства — операции и нормирование</div>
+                    <p>Все товары производства, которые <strong>не имеют стандартных формул расчёта</strong> (нестандартные изделия, кастомные заказы), должны быть снабжены <strong>операциями и временем на выполнение</strong>.</p>
+                    
+                    <p style="margin-top: 12px;"><strong>Кто назначает время:</strong> один из ответственных сотрудников производства.</p>
+                    
+                    <p style="margin-top: 12px;"><strong>Формат записи времени:</strong></p>
+                    <p>Каждая операция содержит два числа: <strong>время переналадки + время на одно изделие</strong> (в минутах).</p>
+                    
+                    <div class="info-block" style="margin-top: 12px;">
+                        <div class="info-block-title">📋 Пример: нестандартный колпак на забор</div>
+                        <table class="spec-table">
+                            <tr><th>Операция</th><th>Переналадка (мин)</th><th>На 1 изделие (мин)</th><th>Запись</th></tr>
+                            <tr><td><strong>Разметка</strong></td><td>20</td><td>40</td><td>20+40</td></tr>
+                            <tr><td><strong>Гибка</strong></td><td>10</td><td>15</td><td>10+15</td></tr>
+                            <tr><td><strong>Сборка</strong></td><td>10</td><td>15</td><td>10+15</td></tr>
+                        </table>
+                    </div>
+                    
+                    <div class="important-box" style="background: #fff3e0; border-color: #ff9800; margin-top: 12px;">
+                        <strong>⚠️ Как считается время переналадки</strong>
+                        <p style="margin-top: 8px;">Время на переналадку переносится на <strong>сборку</strong> и делится на количество изделий в партии.</p>
+                        <p style="margin-top: 8px;"><strong>Пример:</strong> заказ 10 колпаков.</p>
+                        <ul>
+                            <li>Переналадка: 20 + 10 + 10 = 40 мин на всю партию</li>
+                            <li>На 1 изделие: 40 ÷ 10 = <strong>4 мин переналадки на колпак</strong></li>
+                            <li>Итого на 1 колпак: 4 мин (переналадка) + 40 + 15 + 15 = <strong>74 мин</strong></li>
+                        </ul>
+                        <p style="margin-top: 8px; color: #e65100;"><strong>Важно:</strong> на сборку ложится столько времени переналадки, сколько сотрудников задействовано в процессе. Если над сборкой работают 2 человека — переналадка каждого учитывается отдельно.</p>
+                    </div>
+                </div>
+                
                 <div class="highlight">
                             <div class="highlight-title">📋 Содержание раздела</div>
                             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 12px;">
