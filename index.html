@@ -1118,6 +1118,96 @@
             content: "✓";
             font-weight: bold;
         }
+        /* ═══ Аккордеон подразделов (topic-accordion) ═══ */
+        .topic-accordion {
+            margin: 1.5rem 0;
+        }
+        .topic-accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #78909c 0%, #546e7a 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s, box-shadow 0.2s;
+            font-size: 1em;
+            font-weight: 600;
+        }
+        .topic-accordion-header:hover {
+            background: linear-gradient(135deg, #90a4ae 0%, #607d8b 100%);
+            box-shadow: 0 2px 8px rgba(84, 110, 122, 0.25);
+        }
+        .topic-accordion-header .ta-icon {
+            transition: transform 0.3s;
+        }
+        .topic-accordion-header.ta-open {
+            border-radius: 12px 12px 0 0;
+        }
+        .topic-accordion-header.ta-open .ta-icon {
+            transform: rotate(180deg);
+        }
+        .topic-accordion-body {
+            display: none;
+            border: 1px solid #cfd8dc;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            padding: 20px 24px;
+            background: #fff;
+        }
+        .topic-accordion-body.ta-open {
+            display: block;
+        }
+
+        /* ═══ Оглавление секции (Wikipedia-style TOC) ═══ */
+        .section-toc {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 0;
+            margin: 1.5rem 0 2rem;
+            font-size: 0.95em;
+        }
+        .section-toc summary {
+            cursor: pointer;
+            padding: 14px 20px;
+            font-weight: 600;
+            color: var(--primary);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            user-select: none;
+        }
+        .section-toc summary::-webkit-details-marker { display: none; }
+        .section-toc summary::before {
+            content: "▶";
+            font-size: 0.7em;
+            transition: transform 0.2s;
+        }
+        .section-toc[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .section-toc ol {
+            margin: 0;
+            padding: 0 20px 16px 44px;
+            line-height: 2;
+        }
+        .section-toc li {
+            color: var(--text);
+        }
+        .section-toc a {
+            color: var(--primary);
+            text-decoration: none;
+            border-bottom: 1px dotted rgba(63, 81, 181, 0.3);
+        }
+        .section-toc a:hover {
+            border-bottom-style: solid;
+        }
     </style>
 </head>
 <body class="not-authorized">
@@ -1758,7 +1848,13 @@
                 <h1>Фундаментальные знания</h1>
                 <p class="lead">Прежде чем продавать кровельные материалы, нужно понимать, как устроен дом. Этот раздел — база, без которой сложно разговаривать с клиентом на равных.</p>
                 
-                <h2>Как устроен частный дом</h2>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-house">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>Как устроен частный дом</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 <p>Любой дом состоит из нескольких основных частей:</p>
                 <ul>
                     <li><strong>Фундамент</strong> — основание, которое передаёт нагрузку на грунт</li>
@@ -1767,8 +1863,16 @@
                     <li><strong>Кровля</strong> — защита дома сверху от осадков и потерь тепла</li>
                     <li><strong>Фасад</strong> — внешняя отделка стен</li>
                 </ul>
+                    </div>
+                </div>
                 
-                <h2>Стропильная система</h2>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-rafters">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>Стропильная система</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 <p><span class="term">Стропильная система<span class="tooltip">Несущий каркас крыши из деревянных или металлических элементов. Воспринимает снеговую, ветровую нагрузку и вес кровельного покрытия.</span></span> — это несущий каркас крыши. От неё зависит форма кровли и её надёжность.</p>
                 
                 <div class="card">
@@ -1969,8 +2073,16 @@
                     <p><em>«Понимаю желание сэкономить. Давайте посчитаем: разница между сырой и сухой доской — примерно 30-40% в цене. Но если через 3 года стропила поведёт и придётся перекладывать кровлю — это стоимость всей работы плюс новые материалы. Экономия в 50 тысяч превращается в убыток в 500 тысяч. Плюс нервы и время.»</em>
                     </p>
                 </div>
+                    </div>
+                </div>
                 
-                <h2>Типы крыш</h2>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-roof-types">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>Типы крыш</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 <div class="card">
                     <div class="card-title"><span class="card-icon">🏠</span> По форме</div>
                     <ul>
@@ -2003,8 +2115,16 @@
                         <li><span class="term">Фронтон<span class="tooltip">Торцевая часть крыши между скатами. Часто утепляется и отделывается сайдингом или другим материалом.</span></span> — торцевая стена под крышей</li>
                     </ul>
                 </div>
+                    </div>
+                </div>
                 
-                <h2>Вентиляция подкровельного пространства</h2>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-ventilation">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>Вентиляция подкровельного пространства</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 <p>Это критически важный момент, который часто упускают. Без правильной вентиляции:</p>
                 <ul>
                     <li>Скапливается <span class="term">конденсат<span class="tooltip">Влага, которая выпадает из воздуха при охлаждении. Тёплый влажный воздух из дома поднимается вверх, встречает холодную поверхность и превращается в воду.</span></span> — вода на внутренних поверхностях</li>
@@ -2017,8 +2137,16 @@
                     <div class="highlight-title">💡 Как работает вентиляция кровли</div>
                     <p>Холодный воздух заходит через <strong>карниз</strong>, проходит по вентиляционному зазору (созданному контробрешёткой), нагревается и выходит через <strong>конёк</strong> или специальные аэраторы. Этот поток уносит влагу из подкровельного пространства.</p>
                 </div>
+                    </div>
+                </div>
                 
-                <h2>Физика: что нужно понимать</h2>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-physics">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>Физика: что нужно понимать</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 
                 <div class="card">
                     <div class="card-title"><span class="card-icon">🌡️</span> Точка росы</div>
@@ -2042,8 +2170,16 @@
                     <p><span class="term">Теплопроводность<span class="tooltip">Способность материала передавать тепло. Чем ниже коэффициент теплопроводности, тем лучше материал удерживает тепло. У воздуха — 0.025, у минваты — 0.035-0.045, у металла — 50+.</span></span> — скорость передачи тепла через материал. Металл проводит тепло отлично — поэтому металлическая кровля без утепления промерзает и «потеет».</p>
                     <p>Утеплитель нужен не только для сохранения тепла, но и для того, чтобы «отодвинуть» точку росы от внутренней поверхности.</p>
                 </div>
+                    </div>
+                </div>
                 
-                <h2>Фундаментальные принципы строительной физики</h2>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-physics-principles">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>Фундаментальные принципы строительной физики</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 <p>Эти принципы работают одинаково в кровле, цоколе, фасаде. Понимание физики — ключ к правильным рекомендациям клиенту.</p>
                 
                 <div class="card" style="border-left: 4px solid #9b59b6;">
@@ -2210,8 +2346,16 @@
                         </div>
                     </div>
                 </div>
+                    </div>
+                </div>
                 
-                <h2>Кровельный пирог</h2>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-pie">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>Кровельный пирог</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 <p>Так называют правильную последовательность слоёв утеплённой кровли (изнутри наружу):</p>
                 <ol>
                     <li><strong>Внутренняя отделка</strong> (гипсокартон, вагонка)</li>
@@ -2228,7 +2372,15 @@
                 </div>
                 
                 <!-- БАЗОВАЯ МАТЕМАТИКА И ФИЗИКА -->
-                <h2>Базовая математика для кровельщика</h2>
+                    </div>
+                </div>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-math">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>Базовая математика для кровельщика</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 <p>Менеджер — не инженер, но базовую математику знать обязательно. Без неё не рассчитать материал, не объяснить клиенту, почему именно столько, не проверить замер.</p>
                 
                 <div class="card" style="border-left: 4px solid #3498db;">
@@ -2374,8 +2526,16 @@
                         <p>Для расчёта материала нужна РЕАЛЬНАЯ площадь ската, а не проекция. Если есть только вид сверху — умножай на коэффициент уклона (для 30° это примерно 1.15, для 45° — 1.41).</p>
                     </div>
                 </div>
+                    </div>
+                </div>
                 
-                <h2>Базовая физика: конвекция и диффузия</h2>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-convection">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>Базовая физика: конвекция и диффузия</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 <p>Эти два процесса — причина большинства проблем с кровлей. Понимаешь их — понимаешь, почему важен правильный пирог.</p>
                 
                 <div class="card" style="border-left: 4px solid #e74c3c;">
@@ -2458,7 +2618,15 @@
                 </div>
                 
                 <!-- ═══ СНЕГОВАЯ НАГРУЗКА ═══ -->
-                <h2>❄️ Снеговая нагрузка — сколько весит снег на кровле</h2>
+                    </div>
+                </div>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-snow">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>❄️ Снеговая нагрузка — сколько весит снег на кровле</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 
                 <p>Снег — это не просто белое покрывало. Это <strong>реальная нагрузка на стропильную систему</strong>, и она может быть огромной. Менеджер должен понимать эти цифры, чтобы правильно подбирать материалы и объяснять клиенту, зачем нужны снегозадержатели и чистка кровли.</p>
                 
@@ -2509,7 +2677,15 @@
                 </div>
                 
                 <!-- ═══ ДОЖДЬ И ВОДОСБОР ═══ -->
-                <h2>🌧️ Дождь и водосбор — сколько воды с кровли</h2>
+                    </div>
+                </div>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-rain">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>🌧️ Дождь и водосбор — сколько воды с кровли</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 
                 <p>Дождь кажется безобидным, но кровля — это огромная воронка. Каждый квадратный метр собирает литры воды, и всё это должно куда-то уйти. Если водосток не справляется — вода льётся мимо, размывает фундамент, заливает фасад.</p>
                 
@@ -2558,7 +2734,15 @@
                 </div>
                 
                 <!-- ═══ ДЫМОХОД И ВЕНТКАНАЛ В ОДНОЙ ТРУБЕ ═══ -->
-                <h2>🔥 Дымоход и вентканал в одной трубе</h2>
+                    </div>
+                </div>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-chimney">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>🔥 Дымоход и вентканал в одной трубе</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 
                 <p>Частая ситуация: камин (или печь) и вентиляция выходят через одну кирпичную трубу. Это допустимо и даже полезно — но только при правильном устройстве оголовка.</p>
                 
@@ -2618,7 +2802,15 @@
                 </div>
                 
                 <!-- ═══ ПРИМЫКАНИЕ КРОВЛИ К СТЕНЕ ═══ -->
-                <h2>🧱 Примыкание кровли к стене — раздельный узел</h2>
+                    </div>
+                </div>
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-wall-junction">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>🧱 Примыкание кровли к стене — раздельный узел</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+
                 
                 <p>Место, где кровля упирается в стену (пристройка к дому, мансардное окно, парапет, дымоход) — одна из самых ответственных точек. Правильный узел примыкания состоит из <strong>двух отдельных планок</strong>, каждая из которых выполняет свою функцию.</p>
                 
@@ -2694,6 +2886,66 @@
                         </div>
                     </div>
                 </div>
+                    </div>
+                </div>
+                
+                <!-- ═══ СОВМЕСТИМОСТЬ МЕТАЛЛОВ — ГАЛЬВАНИЧЕСКАЯ КОРРОЗИЯ ═══ -->
+                <div class="accordion" style="margin-bottom: 1.5rem;" id="fund-galvanic">
+                    <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                        <span>⚡ Совместимость металлов — гальваническая коррозия</span>
+                        <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                    </div>
+                    <div class="setup-content" style="display: none; background: #ffffff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+                
+                <p>Когда два разных металла оказываются рядом на кровле — через контакт или через дождевую воду — между ними начинается электрохимическая реакция. Более «слабый» металл разрушается ускоренно. Это называется <span class="term">гальваническая коррозия<span class="tooltip">Электрохимический процесс, при котором менее благородный металл (анод) разрушается ускоренно при контакте с более благородным (катодом) в присутствии влаги. Чем дальше металлы в электрохимическом ряду — тем агрессивнее реакция.</span></span>.</p>
+                
+                <div class="important-box" style="background: #fce4ec; border-color: #e91e63;">
+                    <strong>⚠️ Главное правило:</strong>
+                    <p>Медь убивает цинк. При прямом контакте или через дождевую воду. Дождь смывает с меди микрочастицы, эта вода попадает на оцинковку и «съедает» цинковый слой. Полимерное покрытие не спасает — оно рвётся на крепеже и царапинах.</p>
+                </div>
+                
+                <p><strong>Простое правило:</strong> смотри, куда течёт вода. Если вода стекает с более «агрессивного» металла на более «слабый» — будет коррозия.</p>
+                
+                <div class="card" style="border-left: 4px solid #4caf50;">
+                    <div class="card-title"><span class="card-icon">🟢</span> Можно — безопасные сочетания</div>
+                    <ul>
+                        <li><strong>Медный водосток на оцинкованной кровле</strong> — вода с кровли стекает в водосток. Медь внизу, ей ничего не будет</li>
+                        <li><strong>Медный колпак на медной кровле</strong> — одинаковые металлы, проблем нет</li>
+                        <li><strong>Колпак из нержавейки на медной кровле</strong> — нержавейка не боится меди, они близки по свойствам</li>
+                        <li><strong>Оцинкованный колпак на оцинкованной кровле</strong> — одинаковые металлы, всё ок</li>
+                        <li><strong>Нержавейка + любой металл</strong> — универсальный вариант, совместима почти со всем</li>
+                    </ul>
+                </div>
+                
+                <div class="card" style="border-left: 4px solid #e91e63;">
+                    <div class="card-title"><span class="card-icon">🔴</span> Нельзя — опасные сочетания</div>
+                    <ul>
+                        <li><strong>Оцинкованный/стальной колпак на медной кровле</strong> — вода с медной кровли течёт через колпак и разъедает его. Вместо 20 лет прослужит 5</li>
+                        <li><strong>Медный колпак на оцинкованной кровле</strong> — вода с медного колпака стекает на крышу и убивает цинк вокруг трубы. Крыша начнёт ржаветь</li>
+                        <li><strong>Медный отлив/примыкание над оцинкованным фасадом</strong> — та же история: вода с меди течёт вниз на оцинковку</li>
+                    </ul>
+                </div>
+                
+                <div class="highlight">
+                    <div class="highlight-title">💡 Шпаргалка для быстрой проверки</div>
+                    <p style="font-size: 1.05em; line-height: 1.8;">
+                        Медь + медь = ✅<br>
+                        Оцинковка + оцинковка = ✅<br>
+                        Нержавейка + что угодно = ✅<br>
+                        Медь + оцинковка = ❌ кто ниже по потоку воды — тот сгниёт
+                    </p>
+                </div>
+                
+                <div class="speech-modules" style="margin-top: 1rem;">
+                    <div class="speech-modules-title">🎯 Речевой модуль</div>
+                    <div class="speech-item">
+                        <div class="speech-situation">Клиент хочет оцинкованный колпак на медную кровлю (или наоборот):</div>
+                        <div class="speech-text">«Медь и оцинковка несовместимы — это не вопрос вкуса, а химия. Дождевая вода переносит частицы между металлами, и один из них начинает разрушаться в разы быстрее. Мы рекомендуем колпак из того же металла, что кровля. Если медь дорого — подойдёт нержавейка: она совместима с любым покрытием и прослужит так же долго.»</div>
+                    </div>
+                </div>
+                
+                    </div>
+                </div>
                 
                 <!-- ТЕСТ ФУНДАМЕНТАЛЬНЫЕ ЗНАНИЯ: 10 вопросов -->
                 <div class="quiz" id="quiz-fundamentals">
@@ -2701,7 +2953,7 @@
                         <span class="quiz-icon">✍️</span>
                         <div>
                             <div class="quiz-title">Проверь себя</div>
-                            <div class="quiz-subtitle">14 вопросов по разделу «Фундаментальные знания»</div>
+                            <div class="quiz-subtitle">15 вопросов по разделу «Фундаментальные знания»</div>
                         </div>
                     </div>
                     
@@ -2828,6 +3080,15 @@
                             <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Одна универсальная планка</div></div>
                             <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Три планки</div></div>
                             <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Две: планка примыкания на кровле + прижимная к стене</div></div>
+                        </div>
+                    </div>
+                    
+                    <div class="question" data-correct="1">
+                        <div class="question-text"><span class="question-number">15.</span> Клиент хочет поставить оцинкованный колпак на медную кровлю. Что ответить?</div>
+                        <div class="options">
+                            <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Можно, полимерное покрытие защитит колпак</div></div>
+                            <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Нельзя — медь разрушит цинк через дождевую воду, колпак нужен медный или из нержавейки</div></div>
+                            <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Можно, если поставить прокладку из резины</div></div>
                         </div>
                     </div>
                     
@@ -17772,6 +18033,10 @@
                         <div class="glossary-term">Гейбл Познань</div>
                         <div class="glossary-def">Кассетная система подшивки лобовой доски собственного производства. Выгоднее J-фаски Grand Line: дилерская скидка 50% (vs 30% GL), любой цвет RAL, бессрочная гарантия. Комплектация: Гейбл Познань 250 мм, S-планка, стартовая планка, коньковая планка.</div>
                     </div>
+                    <div class="glossary-item">
+                        <div class="glossary-term">Гальваническая коррозия</div>
+                        <div class="glossary-def">Ускоренное разрушение менее благородного металла при контакте с более благородным в присутствии влаги. Главная опасная пара в кровле: медь + оцинковка. Медь «съедает» цинковое покрытие — через прямой контакт или через дождевую воду. Правило: медь и оцинковка на одной кровле несовместимы; безопасная замена — нержавейка.</div>
+                    </div>
                     
                     <div class="glossary-letter">Д</div>
                     <div class="glossary-item">
@@ -20290,7 +20555,7 @@
                 <div class="accordion-item">
                     <div class="accordion-header" onclick="toggleAccordion(this)">
                         <span>📚 Фундаментальные знания</span>
-                        <span class="accordion-count">20 вопросов</span>
+                        <span class="accordion-count">22 вопроса</span>
                     </div>
                     <div class="accordion-content">
                         <div class="accordion-body">
@@ -20481,6 +20746,15 @@
                                         <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Они мешают друг другу эстетически</div></div>
                                         <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Снегорезы дороже</div></div>
                                         <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Одни удерживают снег, другие помогают ему сходить — это взаимоисключающие решения</div></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="question" data-correct="1">
+                                    <div class="question-text"><span class="question-number">22.</span> Клиент хочет оцинкованный колпак на медную кровлю. Что ответить?</div>
+                                    <div class="options">
+                                        <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Можно — полимерное покрытие защитит колпак от коррозии</div></div>
+                                        <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Нельзя — медь разрушит цинк через дождевую воду, нужен медный колпак или из нержавейки</div></div>
+                                        <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Можно, если обработать стык герметиком</div></div>
                                     </div>
                                 </div>
                                 
@@ -21601,6 +21875,14 @@
             });
             state.maxScore = max;
             document.getElementById('max-score').textContent = max;
+        }
+        
+        // Переключение topic-accordion (подразделы секции)
+        function toggleTopic(header) {
+            const body = header.nextElementSibling;
+            const isOpen = header.classList.contains('ta-open');
+            header.classList.toggle('ta-open');
+            body.classList.toggle('ta-open');
         }
         
         // Переключение accordion
