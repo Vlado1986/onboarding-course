@@ -5670,14 +5670,13 @@
                         <div class="pc-res-row" id="pcr-V"><span class="pc-label"><strong>Выручка без НДС</strong></span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                         <hr>
                         <div class="pc-res-row pc-big" id="pcr-Ts"><span class="pc-label">Цена клиенту с НДС</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" id="pcr-nds"><span class="pc-label" style="padding-left: 12px; color: var(--text-light);">в т.ч. НДС в бюджет</span><span class="pc-value" style="color: var(--text-light);">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                         <hr>
                         <div class="pc-res-row" id="pcr-P"><span class="pc-label">Валовая прибыль</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                         <div class="pc-res-row pc-neg" id="pcr-NnP"><span class="pc-label">Налог на прибыль</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                         <div class="pc-res-row pc-total" id="pcr-CP"><span class="pc-label">ЧИСТАЯ ПРИБЫЛЬ</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                         <div class="pc-res-row" id="pcr-m"><span class="pc-label">Маржинальность</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                         <div id="pcr-m-warn" style="display:none; padding: 6px 12px; margin: 4px 0; background: #fef2f2; border-left: 3px solid #dc2626; border-radius: 0 6px 6px 0; font-size: 13px; color: #991b1b;">⚠️ Минимальная маржинальность на товары производства — <strong>не ниже 30%</strong></div>
-                        <hr>
-                        <div class="pc-res-row" id="pcr-nds"><span class="pc-label">НДС в бюджет</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                     </div>
                 </div>
                 
@@ -5870,7 +5869,11 @@
                     var mode = btn.dataset.mode;
                     document.querySelectorAll('.pc-mi').forEach(function(d) { d.style.display = 'none'; });
                     var el = document.getElementById('pc-mi-' + mode);
-                    if (el) el.style.display = '';
+                    if (el) {
+                        el.style.display = '';
+                        var inputs = el.querySelectorAll('input');
+                        inputs.forEach(function(inp) { inp.value = '0'; });
+                    }
                     pcCalc();
                 }
                 
