@@ -5605,11 +5605,11 @@
                         </div>
                         <div class="pc-field">
                             <label>Материалы с НДС, ₽</label>
-                            <input type="number" id="pc-Mv" value="36600" oninput="pcCalc()">
+                            <input type="text" inputmode="numeric" id="pc-Mv" value="36 600" oninput="pcFmtInput(this)">
                         </div>
                         <div class="pc-field">
                             <label>Материалы без НДС, ₽</label>
-                            <input type="number" id="pc-Mb" value="8000" oninput="pcCalc()">
+                            <input type="text" inputmode="numeric" id="pc-Mb" value="8 000" oninput="pcFmtInput(this)">
                         </div>
                     </div>
                     
@@ -5624,7 +5624,7 @@
                     <!-- Поля ввода для каждого режима -->
                     <div class="pc-mi" id="pc-mi-profit">
                         <label>Желаемая чистая прибыль, ₽</label>
-                        <input type="number" id="pc-cp" value="15000" oninput="pcCalc()">
+                        <input type="text" inputmode="numeric" id="pc-cp" value="15 000" oninput="pcFmtInput(this)">
                     </div>
                     <div class="pc-mi" id="pc-mi-margin" style="display:none">
                         <label>Желаемая маржинальность, %</label>
@@ -5662,12 +5662,12 @@
                     <!-- Результаты -->
                     <div class="pc-results">
                         <div class="pc-res-row" id="pcr-R"><span class="pc-label">Стоимость работ</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" style="color: #16a34a;" id="pcr-nr"><span class="pc-label">+ наценка на работы <span class="pc-pct" style="color: #6b7280; font-weight: 400;"></span></span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                         <div class="pc-res-row" id="pcr-M"><span class="pc-label">Стоимость материалов</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <div class="pc-res-row" id="pcr-S"><span class="pc-label">Себестоимость</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" style="color: #16a34a;" id="pcr-nm"><span class="pc-label">+ наценка на материалы <span class="pc-pct" style="color: #6b7280; font-weight: 400;"></span></span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                         <hr>
-                        <div class="pc-res-row" id="pcr-nr"><span class="pc-label">Наценка на работы</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <div class="pc-res-row" id="pcr-nm"><span class="pc-label">Наценка на материалы</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <div class="pc-res-row" id="pcr-V"><span class="pc-label">Выручка без НДС</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" id="pcr-S"><span class="pc-label">Себестоимость</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" id="pcr-V"><span class="pc-label"><strong>Выручка без НДС</strong></span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                         <hr>
                         <div class="pc-res-row pc-big" id="pcr-Ts"><span class="pc-label">Цена клиенту с НДС</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                         <hr>
@@ -5900,9 +5900,10 @@
                         
                         pcSet('pcr-R', pcFmt(R), T + ' мин × 20');
                         pcSet('pcr-M', pcFmt(M), pcFmt(Mv) + ' + ' + pcFmt(Mb) + ' (полные суммы, вычета нет)');
+                        var markupR_u = R * nr, markupM_u = M * nm;
+                        pcSetNr('pcr-nr', pcFmt(markupR_u), (nr*100).toFixed(1) + '%', pcFmt(R) + ' × ' + (nr*100).toFixed(1) + '%');
+                        pcSetNr('pcr-nm', pcFmt(markupM_u), (nm*100).toFixed(1) + '%', pcFmt(M) + ' × ' + (nm*100).toFixed(1) + '%');
                         pcSet('pcr-S', pcFmt(S), pcFmt(R) + ' + ' + pcFmt(M));
-                        pcSet('pcr-nr', (nr*100).toFixed(1) + '%', 'задано');
-                        pcSet('pcr-nm', (nm*100).toFixed(1) + '%', '= наценке');
                         pcSet('pcr-V', pcFmt(V), pcFmt(S) + ' × ' + (1+n_usn).toFixed(2));
                         pcSet('pcr-Ts', pcFmt(Ts), 'УСН — НДС не начисляется');
                         pcSet('pcr-P', pcFmt(P), pcFmt(V) + ' − ' + pcFmt(S));
@@ -5933,8 +5934,8 @@
                                 pcSet('pcr-R', pcFmt(R), T + ' мин × 20');
                                 pcSet('pcr-M', pcFmt(M), pcFmt(Math.round(Mv/(1+V_RATE))) + ' + ' + pcFmt(Mb));
                                 pcSet('pcr-S', pcFmt(S), pcFmt(R) + ' + ' + pcFmt(M));
-                                pcSet('pcr-nr', '—', 'маржа ≥ ' + (maxMargin*100) + '% невозможна');
-                                pcSet('pcr-nm', '—', 'маржа ≥ ' + (maxMargin*100) + '% невозможна');
+                                pcSetNr('pcr-nr', '—', '—', 'маржа ≥ ' + (maxMargin*100) + '% невозможна');
+                                pcSetNr('pcr-nm', '—', '—', 'маржа ≥ ' + (maxMargin*100) + '% невозможна');
                                 pcSet('pcr-V', '⚠️ невозможно', 'При налоге ' + (T_RATE*100) + '% макс. маржа = ' + (maxMargin*100) + '%');
                                 pcSet('pcr-Ts', '—', '');
                                 pcSet('pcr-P', '—', ''); pcSet('pcr-NnP', '—', '');
@@ -5974,9 +5975,10 @@
                     var isInput = (mode === 'split');
                     pcSet('pcr-R', pcFmt(R), T + ' мин × 20');
                     pcSet('pcr-M', pcFmt(M), pcFmt(Math.round(Mv_net)) + ' + ' + pcFmt(Mb));
+                    var markupR = R * nr, markupM = M * nm;
+                    pcSetNr('pcr-nr', pcFmt(markupR), (nr*100).toFixed(1) + '%', isInput ? 'задано: ' + pcFmt(R) + ' × ' + (nr*100).toFixed(1) + '%' : pcFmt(R) + ' × ' + (nr*100).toFixed(1) + '%');
+                    pcSetNr('pcr-nm', pcFmt(markupM), (nm*100).toFixed(1) + '%', isInput ? 'задано: ' + pcFmt(M) + ' × ' + (nm*100).toFixed(1) + '%' : pcFmt(M) + ' × ' + (nm*100).toFixed(1) + '%');
                     pcSet('pcr-S', pcFmt(S), pcFmt(R) + ' + ' + pcFmt(M));
-                    pcSet('pcr-nr', (nr*100).toFixed(1) + '%', isInput ? 'задано' : 'П ÷ С = ' + pcFmt(P) + ' ÷ ' + pcFmt(S));
-                    pcSet('pcr-nm', (nm*100).toFixed(1) + '%', isInput ? 'задано' : '= наценке на работы');
                     pcSet('pcr-V', pcFmt(V), isInput 
                         ? pcFmt(R) + '×' + (1+nr).toFixed(2) + ' + ' + pcFmt(M) + '×' + (1+nm).toFixed(2)
                         : pcFmt(S) + ' × ' + (1+nr).toFixed(2));
@@ -5990,8 +5992,23 @@
                     if (warn) warn.style.display = (m > 0 && m < 0.3) ? '' : 'none';
                 }
                 
-                function pcNum(id) { var el = document.getElementById(id); return el ? (parseFloat(el.value) || 0) : 0; }
+                function pcNum(id) { var el = document.getElementById(id); return el ? (parseFloat(el.value.replace(/\s/g, '')) || 0) : 0; }
                 function pcFmt(n) { return Math.round(n).toLocaleString('ru-RU'); }
+                function pcFmtInput(el) {
+                    var pos = el.selectionStart;
+                    var before = el.value.substring(0, pos);
+                    var digitsBefore = before.replace(/\D/g, '').length;
+                    var raw = el.value.replace(/[^\d]/g, '');
+                    var formatted = raw.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+                    el.value = formatted;
+                    var newPos = 0, count = 0;
+                    for (var i = 0; i < formatted.length && count < digitsBefore; i++) {
+                        newPos = i + 1;
+                        if (formatted[i] !== ' ') count++;
+                    }
+                    el.setSelectionRange(newPos, newPos);
+                    pcCalc();
+                }
                 function pcSet(rowId, value, formula) {
                     var row = document.getElementById(rowId);
                     if (!row) return;
@@ -5999,6 +6016,13 @@
                     if (v) v.textContent = value;
                     var t = row.querySelector('.pc-tip');
                     if (t) t.textContent = formula || '';
+                }
+                function pcSetNr(rowId, absValue, pct, formula) {
+                    pcSet(rowId, '+' + absValue, formula);
+                    var row = document.getElementById(rowId);
+                    if (!row) return;
+                    var p = row.querySelector('.pc-pct');
+                    if (p) p.textContent = '(' + pct + ')';
                 }
                 
                 // Автозапуск при показе раздела
