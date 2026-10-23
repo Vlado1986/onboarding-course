@@ -1208,6 +1208,94 @@
         .section-toc a:hover {
             border-bottom-style: solid;
         }
+        
+        /* === Расчёт стоимости: формулы === */
+        .formula-ref-card {
+            background: linear-gradient(135deg, #f0f7ff 0%, #f8fafc 100%);
+            border: 2px solid #c7d9f0;
+            border-radius: 16px;
+            padding: 25px 30px;
+            margin: 25px 0;
+        }
+        .formula-group-title {
+            font-size: 12px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.8px; color: var(--primary);
+            margin: 20px 0 8px; padding-bottom: 5px;
+            border-bottom: 1px solid #c7d9f0;
+        }
+        .formula-group-title:first-child { margin-top: 0; }
+        .formula-line {
+            display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px;
+            padding: 5px 0; font-size: 17px;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            line-height: 2;
+        }
+        .fv {
+            position: relative; display: inline-block;
+            color: var(--primary); font-weight: 700; cursor: help;
+            border-bottom: 2px dashed var(--primary);
+            padding: 1px 4px; border-radius: 3px;
+            transition: background 0.15s;
+        }
+        .fv:hover { background: #dbeafe; }
+        .fv .ft {
+            position: absolute; bottom: calc(100% + 10px); left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b; color: #f1f5f9;
+            padding: 10px 14px; border-radius: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 13px; font-weight: 400; line-height: 1.5;
+            min-width: 200px; max-width: 340px;
+            opacity: 0; visibility: hidden; transition: opacity 0.2s;
+            z-index: 10000; pointer-events: none;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            text-align: left; white-space: normal;
+        }
+        .fv:hover .ft { opacity: 1; visibility: visible; }
+        .fv .ft::after {
+            content: ''; position: absolute; top: 100%; left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent; border-top-color: #1e293b;
+        }
+        .fv-r { color: #16a34a; border-bottom-color: #16a34a; }
+        .fv-r:hover { background: #dcfce7; }
+        .fo { color: #64748b; font-weight: 400; padding: 0 2px; }
+        .ft-v {
+            display: block; margin-top: 6px; padding-top: 6px;
+            border-top: 1px solid #475569;
+            font-style: italic; color: #94a3b8;
+        }
+        .calc-step {
+            background: #fff; border: 1px solid var(--border);
+            border-radius: 12px; padding: 20px 25px; margin: 15px 0;
+        }
+        .calc-step-head {
+            font-size: 15px; font-weight: 700; color: var(--text);
+            margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+        }
+        .calc-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 28px; height: 28px; background: var(--primary);
+            color: #fff; border-radius: 50%; font-size: 14px; font-weight: 700;
+            flex-shrink: 0;
+        }
+        .calc-result {
+            background: #f0fdf4; border: 1px solid #bbf7d0;
+            padding: 8px 14px; border-radius: 8px;
+            font-weight: 600; color: #16a34a; display: inline-block; margin-top: 8px;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+        }
+        .calc-formula {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 15px; background: #f8fafc; padding: 8px 14px;
+            border-radius: 8px; border: 1px solid var(--border);
+            display: inline-block; margin: 6px 0;
+        }
+        .cf-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .cf-table td { padding: 8px 12px; border-bottom: 1px solid var(--border); font-size: 15px; }
+        .cf-table .cf-in { color: #16a34a; font-weight: 600; }
+        .cf-table .cf-out { color: #dc2626; }
+        .cf-table .cf-total td { font-weight: 700; border-top: 2px solid var(--text); }
     </style>
 </head>
 <body class="not-authorized">
@@ -1313,6 +1401,10 @@
         <a class="nav-item internal-only" data-section="internal-1c" onclick="showSection('internal-1c')">
             <span class="nav-item-icon">💻</span>
             Работа в 1С
+        </a>
+        <a class="nav-item internal-only" data-section="pricing-calc" onclick="showSection('pricing-calc')">
+            <span class="nav-item-icon">💰</span>
+            Расчёт стоимости
         </a>
         
         <div class="nav-section">Часть 2. Продажи</div>
@@ -5445,6 +5537,464 @@
                             <button class="btn-check" onclick="checkQuiz('quiz-1c')">Проверить ответы</button>
                             <div class="quiz-result" id="result-quiz-1c"></div>
                         </div>
+            </section>
+            
+            <!-- РАСЧЁТ СТОИМОСТИ (закрытый раздел) -->
+            <section class="section internal-only" id="pricing-calc">
+                <style>
+                    #price-calc { margin: 20px 0; }
+                    .pc-consts { display: flex; gap: 20px; padding: 10px 16px; background: var(--bg); border-radius: 8px; font-size: 14px; color: var(--text-light); margin-bottom: 24px; flex-wrap: wrap; }
+                    .pc-consts span strong { color: var(--text); }
+                    .pc-inputs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+                    @media(max-width: 700px) { .pc-inputs { grid-template-columns: 1fr; } }
+                    .pc-field label { display: block; font-size: 11px; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px; }
+                    .pc-field input, .pc-mi input { width: 100%; padding: 10px 14px; border: 2px solid var(--border); border-radius: 8px; font-size: 18px; font-weight: 600; color: var(--text); transition: border-color 0.15s; box-sizing: border-box; }
+                    .pc-field input:focus, .pc-mi input:focus { outline: none; border-color: var(--primary); }
+                    .pc-modes { display: flex; gap: 3px; margin-bottom: 16px; background: var(--bg); padding: 3px; border-radius: 10px; overflow-x: auto; }
+                    .pc-mode { flex: 1; padding: 9px 8px; border: none; background: transparent; border-radius: 8px; font-size: 12.5px; font-weight: 600; cursor: pointer; transition: all 0.15s; white-space: nowrap; color: var(--text-light); }
+                    .pc-mode:hover { background: #fff; color: var(--text); }
+                    .pc-mode.active { background: var(--primary); color: #fff; box-shadow: 0 2px 8px rgba(37,99,235,0.3); }
+                    .pc-mi { padding: 16px; background: #eff6ff; border-radius: 10px; border: 1px solid #c7d9f0; margin-bottom: 20px; }
+                    .pc-mi label { display: block; font-size: 12px; font-weight: 600; color: var(--primary-dark); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
+                    .pc-mi input { border-color: var(--primary); font-weight: 700; color: var(--primary-dark); background: #fff; max-width: 280px; }
+                    .pc-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+                    @media(max-width: 500px) { .pc-field-row { grid-template-columns: 1fr; } }
+                    .pc-results { background: #fff; border: 2px solid var(--border); border-radius: 12px; padding: 16px 20px; }
+                    .pc-results hr { border: none; border-top: 1px solid var(--border); margin: 6px 0; }
+                    .pc-res-row { display: flex; align-items: center; padding: 5px 0; }
+                    .pc-label { flex: 1; font-size: 14px; color: var(--text); }
+                    .pc-value { font-size: 16px; font-weight: 600; font-family: 'SF Mono', 'Fira Code', monospace; text-align: right; min-width: 110px; }
+                    .pc-big .pc-value { font-size: 20px; color: var(--primary); }
+                    .pc-total { background: #f0fdf4; margin: 4px -20px; padding: 8px 20px; border-radius: 8px; }
+                    .pc-total .pc-value { color: #16a34a; font-size: 22px; }
+                    .pc-total .pc-label { font-weight: 700; }
+                    .pc-neg .pc-value { color: #dc2626; }
+                    .pc-info { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 13px; color: #94a3b8; cursor: help; position: relative; margin-left: 6px; flex-shrink: 0; }
+                    .pc-info:hover { color: var(--primary); }
+                    .pc-tip { position: absolute; bottom: calc(100% + 8px); right: -4px; background: #1e293b; color: #e2e8f0; padding: 8px 12px; border-radius: 6px; font-family: 'SF Mono', monospace; font-size: 12px; font-weight: 500; white-space: nowrap; opacity: 0; visibility: hidden; transition: opacity 0.15s; z-index: 10000; pointer-events: none; box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+                    .pc-info:hover .pc-tip { opacity: 1; visibility: visible; }
+                    .pc-tip::after { content: ''; position: absolute; top: 100%; right: 10px; border: 5px solid transparent; border-top-color: #1e293b; }
+                </style>
+                
+                <h1>💰 Расчёт стоимости</h1>
+                <p class="lead">Калькулятор цены изделия. Введи исходные данные, выбери способ расчёта — увидишь цену для клиента и чистую прибыль.</p>
+                
+                <div class="pc-consts">
+                    <span>⏱ Минута работы: <strong>20 ₽</strong></span>
+                    <span>📋 НДС: <strong>22%</strong></span>
+                    <span>📋 Налог на прибыль: <strong>25%</strong></span>
+                </div>
+                
+                <!-- ═══ КАЛЬКУЛЯТОР ═══ -->
+                <div id="price-calc">
+                    
+                    <div class="pc-inputs">
+                        <div class="pc-field">
+                            <label>Минуты работы</label>
+                            <input type="number" id="pc-T" value="150" oninput="pcCalc()">
+                        </div>
+                        <div class="pc-field">
+                            <label>Материалы с НДС, ₽</label>
+                            <input type="number" id="pc-Mv" value="36600" oninput="pcCalc()">
+                        </div>
+                        <div class="pc-field">
+                            <label>Материалы без НДС, ₽</label>
+                            <input type="number" id="pc-Mb" value="8000" oninput="pcCalc()">
+                        </div>
+                    </div>
+                    
+                    <div class="pc-modes">
+                        <button class="pc-mode active" data-mode="profit" onclick="pcSetMode(this)">💰 Целевая прибыль</button>
+                        <button class="pc-mode" data-mode="margin" onclick="pcSetMode(this)">📊 Целевая маржа</button>
+                        <button class="pc-mode" data-mode="split" onclick="pcSetMode(this)">↕️ Раздельные наценки</button>
+                        <button class="pc-mode" data-mode="single" onclick="pcSetMode(this)">➡️ Единая наценка</button>
+                        <button class="pc-mode" data-mode="usn" onclick="pcSetMode(this)">📋 УСН</button>
+                    </div>
+                    
+                    <!-- Поля ввода для каждого режима -->
+                    <div class="pc-mi" id="pc-mi-profit">
+                        <label>Желаемая чистая прибыль, ₽</label>
+                        <input type="number" id="pc-cp" value="15000" oninput="pcCalc()">
+                    </div>
+                    <div class="pc-mi" id="pc-mi-margin" style="display:none">
+                        <label>Желаемая маржинальность, %</label>
+                        <input type="number" id="pc-margin" value="25" step="0.1" oninput="pcCalc()">
+                    </div>
+                    <div class="pc-mi" id="pc-mi-split" style="display:none">
+                        <div class="pc-field-row">
+                            <div class="pc-field">
+                                <label>Наценка на работы, %</label>
+                                <input type="number" id="pc-nr" value="60" oninput="pcCalc()">
+                            </div>
+                            <div class="pc-field">
+                                <label>Наценка на материалы, %</label>
+                                <input type="number" id="pc-nm" value="35" oninput="pcCalc()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pc-mi" id="pc-mi-single" style="display:none">
+                        <label>Единая наценка на всё, %</label>
+                        <input type="number" id="pc-n" value="50" oninput="pcCalc()">
+                    </div>
+                    <div class="pc-mi" id="pc-mi-usn" style="display:none">
+                        <div class="pc-field-row">
+                            <div class="pc-field">
+                                <label>Наценка, %</label>
+                                <input type="number" id="pc-n-usn" value="50" oninput="pcCalc()">
+                            </div>
+                            <div class="pc-field">
+                                <label>Ставка УСН, %</label>
+                                <input type="number" id="pc-t-usn" value="8" oninput="pcCalc()">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Результаты -->
+                    <div class="pc-results">
+                        <div class="pc-res-row" id="pcr-R"><span class="pc-label">Стоимость работ</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" id="pcr-M"><span class="pc-label">Стоимость материалов</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" id="pcr-S"><span class="pc-label">Себестоимость</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <hr>
+                        <div class="pc-res-row" id="pcr-nr"><span class="pc-label">Наценка на работы</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" id="pcr-nm"><span class="pc-label">Наценка на материалы</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" id="pcr-V"><span class="pc-label">Выручка без НДС</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <hr>
+                        <div class="pc-res-row pc-big" id="pcr-Ts"><span class="pc-label">Цена клиенту с НДС</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <hr>
+                        <div class="pc-res-row" id="pcr-P"><span class="pc-label">Валовая прибыль</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row pc-neg" id="pcr-NnP"><span class="pc-label">Налог на прибыль</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row pc-total" id="pcr-CP"><span class="pc-label">ЧИСТАЯ ПРИБЫЛЬ</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" id="pcr-m"><span class="pc-label">Маржинальность</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div id="pcr-m-warn" style="display:none; padding: 6px 12px; margin: 4px 0; background: #fef2f2; border-left: 3px solid #dc2626; border-radius: 0 6px 6px 0; font-size: 13px; color: #991b1b;">⚠️ Минимальная маржинальность на товары производства — <strong>не ниже 30%</strong></div>
+                        <hr>
+                        <div class="pc-res-row" id="pcr-nds"><span class="pc-label">НДС в бюджет</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                    </div>
+                </div>
+                
+                <!-- ═══ СПРАВОЧНИК ФОРМУЛ ═══ -->
+                <h2>📐 Справочник формул</h2>
+                <p style="color: var(--text-light); font-size: 14px; margin-bottom: 8px;">Наведи на <span style="color: var(--primary); font-weight: 600; border-bottom: 2px dashed var(--primary); padding: 0 2px;">синюю</span> переменную — увидишь значение. На <span style="color: #16a34a; font-weight: 600; border-bottom: 2px dashed #16a34a; padding: 0 2px;">зелёную</span> (слева от =) — формулу словами.</p>
+                
+                <div class="formula-ref-card">
+                    <div class="formula-group-title">Себестоимость</div>
+                    <div class="formula-line">
+                        <span class="fv fv-r">R<span class="ft"><b>Стоимость работ</b> (без НДС)<span class="ft-v">Стоимость работ = Минуты × Стоимость минуты</span></span></span>
+                        <span class="fo">=</span>
+                        <span class="fv">T<span class="ft"><b>T</b> — минуты работы на изделие</span></span>
+                        <span class="fo">×</span>
+                        <span class="fv">p<span class="ft"><b>p</b> — стоимость минуты = 20 руб</span></span>
+                    </div>
+                    <div class="formula-line">
+                        <span class="fv fv-r">M<sub>нетто</sub><span class="ft"><b>Чистая стоимость</b> материалов из счетов с НДС<span class="ft-v">Материалы нетто = Счёт с НДС ÷ 1.22</span></span></span>
+                        <span class="fo">=</span>
+                        <span class="fv">M<sub>в</sub><span class="ft"><b>M<sub>в</sub></b> — сумма счёта с НДС</span></span>
+                        <span class="fo">÷ 1.22</span>
+                    </div>
+                    <div class="formula-line">
+                        <span class="fv fv-r">С<span class="ft"><b>Себестоимость</b> изделия<span class="ft-v">Себестоимость = Работа + Материалы нетто + Материалы без НДС</span></span></span>
+                        <span class="fo">=</span>
+                        <span class="fv">R<span class="ft"><b>R</b> — стоимость работ</span></span>
+                        <span class="fo">+</span>
+                        <span class="fv">M<sub>нетто</sub><span class="ft"><b>M<sub>нетто</sub></b> — материалы из счетов с НДС (чистые)</span></span>
+                        <span class="fo">+</span>
+                        <span class="fv">M<sub>б</sub><span class="ft"><b>M<sub>б</sub></b> — материалы без НДС</span></span>
+                    </div>
+                    
+                    <div class="formula-group-title">Цена и прибыль</div>
+                    <div class="formula-line">
+                        <span class="fv fv-r">В<span class="ft"><b>Выручка без НДС</b><span class="ft-v">Выручка = Работа × (1 + Наценка работы) + Материалы × (1 + Наценка материалов)</span></span></span>
+                        <span class="fo">=</span>
+                        <span class="fv">R<span class="ft"><b>R</b> — стоимость работ</span></span>
+                        <span class="fo">×(1+</span>
+                        <span class="fv">н<sub>р</sub><span class="ft"><b>н<sub>р</sub></b> — наценка на работы (%)</span></span>
+                        <span class="fo">) +</span>
+                        <span class="fv">М<span class="ft"><b>М</b> — стоимость материалов</span></span>
+                        <span class="fo">×(1+</span>
+                        <span class="fv">н<sub>м</sub><span class="ft"><b>н<sub>м</sub></b> — наценка на материалы (%)</span></span>
+                        <span class="fo">)</span>
+                    </div>
+                    <div class="formula-line">
+                        <span class="fv fv-r">Ц<span class="ft"><b>Цена клиенту</b> с НДС<span class="ft-v">Цена = Выручка × 1.22</span></span></span>
+                        <span class="fo">=</span>
+                        <span class="fv">В<span class="ft"><b>В</b> — выручка без НДС</span></span>
+                        <span class="fo">× 1.22</span>
+                    </div>
+                    <div class="formula-line">
+                        <span class="fv fv-r">ЧП<span class="ft"><b>Чистая прибыль</b> — остаётся компании<span class="ft-v">Чистая прибыль = (Выручка − Себестоимость) × 0.75</span></span></span>
+                        <span class="fo">= (</span>
+                        <span class="fv">В<span class="ft"><b>В</b> — выручка без НДС</span></span>
+                        <span class="fo">−</span>
+                        <span class="fv">С<span class="ft"><b>С</b> — себестоимость</span></span>
+                        <span class="fo">) × 0.75</span>
+                    </div>
+                    <div class="formula-line">
+                        <span class="fv fv-r">m<span class="ft"><b>Маржинальность</b> (%)<span class="ft-v">Маржинальность = Чистая прибыль ÷ Выручка</span></span></span>
+                        <span class="fo">=</span>
+                        <span class="fv">ЧП<span class="ft"><b>ЧП</b> — чистая прибыль</span></span>
+                        <span class="fo">÷</span>
+                        <span class="fv">В<span class="ft"><b>В</b> — выручка без НДС</span></span>
+                    </div>
+                    
+                    <div class="formula-group-title">Обратные формулы</div>
+                    <div class="formula-line">
+                        <span class="fv fv-r">н<span class="ft"><b>Наценка</b> из целевой ЧП<span class="ft-v">Наценка = Целевая ЧП ÷ (0.75 × Себестоимость)</span></span></span>
+                        <span class="fo">=</span>
+                        <span class="fv">ЧП<sub>цель</sub><span class="ft"><b>ЧП<sub>цель</sub></b> — желаемая чистая прибыль</span></span>
+                        <span class="fo">÷ (0.75 ×</span>
+                        <span class="fv">С<span class="ft"><b>С</b> — себестоимость</span></span>
+                        <span class="fo">)</span>
+                    </div>
+                    <div class="formula-line">
+                        <span class="fv fv-r">В<span class="ft"><b>Выручка</b> из целевой маржи<span class="ft-v">Выручка = Себестоимость × 0.75 ÷ (0.75 − маржа)</span></span></span>
+                        <span class="fo">=</span>
+                        <span class="fv">С<span class="ft"><b>С</b> — себестоимость</span></span>
+                        <span class="fo">× 0.75 ÷ (0.75 −</span>
+                        <span class="fv">m<span class="ft"><b>m</b> — целевая маржинальность</span></span>
+                        <span class="fo">)</span>
+                    </div>
+                </div>
+                
+                <!-- ═══ ТЕСТ ═══ -->
+                <div class="quiz" id="quiz-pricing">
+                    <div class="quiz-header">
+                        <span class="quiz-icon">✍️</span>
+                        <div>
+                            <div class="quiz-title">Проверь себя</div>
+                            <div class="quiz-subtitle">10 вопросов по разделу «Расчёт стоимости»</div>
+                        </div>
+                    </div>
+                    <div class="question" data-correct="0">
+                        <div class="question-text"><span class="question-number">1.</span> Из чего складывается себестоимость изделия?</div>
+                        <div class="options">
+                            <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Стоимость работ + стоимость материалов</div></div>
+                            <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Стоимость работ + наценка</div></div>
+                            <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Цена для клиента минус НДС</div></div>
+                        </div>
+                    </div>
+                    <div class="question" data-correct="1">
+                        <div class="question-text"><span class="question-number">2.</span> Стоимость одной минуты работы на производстве:</div>
+                        <div class="options">
+                            <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">10 руб</div></div>
+                            <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">20 руб</div></div>
+                            <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">50 руб</div></div>
+                        </div>
+                    </div>
+                    <div class="question" data-correct="1">
+                        <div class="question-text"><span class="question-number">3.</span> Материалы куплены с НДС за 36 600 руб. Их чистая стоимость для нас:</div>
+                        <div class="options">
+                            <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">36 600 руб</div></div>
+                            <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">30 000 руб</div></div>
+                            <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">28 548 руб</div></div>
+                        </div>
+                    </div>
+                    <div class="question" data-correct="1">
+                        <div class="question-text"><span class="question-number">4.</span> Какая ставка НДС?</div>
+                        <div class="options">
+                            <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">20%</div></div>
+                            <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">22%</div></div>
+                            <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">25%</div></div>
+                        </div>
+                    </div>
+                    <div class="question" data-correct="2">
+                        <div class="question-text"><span class="question-number">5.</span> Ставка налога на прибыль (с 2025 года):</div>
+                        <div class="options">
+                            <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">20%</div></div>
+                            <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">22%</div></div>
+                            <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">25%</div></div>
+                        </div>
+                    </div>
+                    <div class="question" data-correct="2">
+                        <div class="question-text"><span class="question-number">6.</span> Наценка на работы 60%, стоимость работ 3 000. Выручка от работ:</div>
+                        <div class="options">
+                            <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">1 800 руб</div></div>
+                            <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">3 600 руб</div></div>
+                            <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">4 800 руб</div></div>
+                        </div>
+                    </div>
+                    <div class="question" data-correct="1">
+                        <div class="question-text"><span class="question-number">7.</span> Валовая прибыль 20 000 руб. Чистая прибыль:</div>
+                        <div class="options">
+                            <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">20 000 руб</div></div>
+                            <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">15 000 руб</div></div>
+                            <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">16 000 руб</div></div>
+                        </div>
+                    </div>
+                    <div class="question" data-correct="2">
+                        <div class="question-text"><span class="question-number">8.</span> Цена для клиента (ОСНО) — это:</div>
+                        <div class="options">
+                            <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Себестоимость + наценка</div></div>
+                            <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Выручка без НДС</div></div>
+                            <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Выручка × 1.22</div></div>
+                        </div>
+                    </div>
+                    <div class="question" data-correct="1">
+                        <div class="question-text"><span class="question-number">9.</span> При покупке материалов без НДС (vs с НДС за ту же чистую цену):</div>
+                        <div class="options">
+                            <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Прибыль уменьшается</div></div>
+                            <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">НДС в бюджет больше, но прибыль та же</div></div>
+                            <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Себестоимость увеличивается</div></div>
+                        </div>
+                    </div>
+                    <div class="question" data-correct="0">
+                        <div class="question-text"><span class="question-number">10.</span> В режиме УСН цена для клиента:</div>
+                        <div class="options">
+                            <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Без НДС (не начисляется)</div></div>
+                            <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">С НДС 22%</div></div>
+                            <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">С НДС 10%</div></div>
+                        </div>
+                    </div>
+                    <button class="btn-check" onclick="checkQuiz('quiz-pricing')">Проверить ответы</button>
+                    <button class="btn-retry" style="display:none;" onclick="resetQuiz('quiz-pricing')">🔄 Пересдать</button>
+                    <div class="quiz-result" id="result-quiz-pricing"></div>
+                </div>
+                
+                <div class="section-nav">
+                    <button class="btn-nav" onclick="showSection('internal-1c')">← Работа в 1С</button>
+                    <button class="btn-nav primary" onclick="showSection('conditions-ai')">Работа с ИИ →</button>
+                </div>
+                
+                <script>
+                function pcSetMode(btn) {
+                    document.querySelectorAll('.pc-mode').forEach(function(b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+                    var mode = btn.dataset.mode;
+                    document.querySelectorAll('.pc-mi').forEach(function(d) { d.style.display = 'none'; });
+                    var el = document.getElementById('pc-mi-' + mode);
+                    if (el) el.style.display = '';
+                    pcCalc();
+                }
+                
+                function pcCalc() {
+                    var modeBtn = document.querySelector('.pc-mode.active');
+                    var mode = modeBtn ? modeBtn.dataset.mode : 'profit';
+                    var P_MIN = 20, V_RATE = 0.22, T_RATE = 0.25;
+                    
+                    var T = pcNum('pc-T'), Mv = pcNum('pc-Mv'), Mb = pcNum('pc-Mb');
+                    var R = T * P_MIN;
+                    var Mv_net, M, S, V, P, NnP, CP, Ts, m, nr, nm;
+                    var nds_ish, nds_vh, nds_budget;
+                    
+                    if (mode === 'usn') {
+                        M = Mv + Mb;
+                        S = R + M;
+                        var n_usn = pcNum('pc-n-usn') / 100;
+                        var t_usn = pcNum('pc-t-usn') / 100;
+                        V = S * (1 + n_usn);
+                        nr = n_usn; nm = n_usn;
+                        P = S * n_usn;
+                        NnP = P * t_usn;
+                        CP = P - NnP;
+                        Ts = V;
+                        m = V > 0 ? CP / V : 0;
+                        nds_budget = 0;
+                        
+                        pcSet('pcr-R', pcFmt(R), T + ' мин × 20');
+                        pcSet('pcr-M', pcFmt(M), pcFmt(Mv) + ' + ' + pcFmt(Mb) + ' (полные суммы, вычета нет)');
+                        pcSet('pcr-S', pcFmt(S), pcFmt(R) + ' + ' + pcFmt(M));
+                        pcSet('pcr-nr', (nr*100).toFixed(1) + '%', 'задано');
+                        pcSet('pcr-nm', (nm*100).toFixed(1) + '%', '= наценке');
+                        pcSet('pcr-V', pcFmt(V), pcFmt(S) + ' × ' + (1+n_usn).toFixed(2));
+                        pcSet('pcr-Ts', pcFmt(Ts), 'УСН — НДС не начисляется');
+                        pcSet('pcr-P', pcFmt(P), pcFmt(V) + ' − ' + pcFmt(S));
+                        pcSet('pcr-NnP', '−' + pcFmt(NnP), pcFmt(P) + ' × ' + t_usn);
+                        pcSet('pcr-CP', pcFmt(CP), pcFmt(P) + ' − ' + pcFmt(NnP));
+                        pcSet('pcr-m', (m*100).toFixed(1) + '%', pcFmt(CP) + ' ÷ ' + pcFmt(V));
+                        pcSet('pcr-nds', '0', 'УСН — НДС нет');
+                        var warn = document.getElementById('pcr-m-warn');
+                        if (warn) warn.style.display = (m > 0 && m < 0.3) ? '' : 'none';
+                        return;
+                    }
+                    
+                    Mv_net = Mv / (1 + V_RATE);
+                    M = Mv_net + Mb;
+                    S = R + M;
+                    
+                    switch (mode) {
+                        case 'profit':
+                            var cp_t = pcNum('pc-cp');
+                            P = cp_t / (1 - T_RATE);
+                            nr = S > 0 ? P / S : 0; nm = nr;
+                            V = S * (1 + nr);
+                            break;
+                        case 'margin':
+                            var m_t = pcNum('pc-margin') / 100;
+                            var denom = (1 - T_RATE) - m_t;
+                            V = denom > 0 ? S * (1 - T_RATE) / denom : 0;
+                            P = V - S;
+                            nr = S > 0 ? P / S : 0; nm = nr;
+                            break;
+                        case 'split':
+                            nr = pcNum('pc-nr') / 100;
+                            nm = pcNum('pc-nm') / 100;
+                            V = R * (1 + nr) + M * (1 + nm);
+                            P = R * nr + M * nm;
+                            break;
+                        case 'single':
+                            var n = pcNum('pc-n') / 100;
+                            nr = n; nm = n;
+                            V = S * (1 + n);
+                            P = S * n;
+                            break;
+                    }
+                    
+                    NnP = P * T_RATE;
+                    CP = P * (1 - T_RATE);
+                    Ts = V * (1 + V_RATE);
+                    m = V > 0 ? CP / V : 0;
+                    nds_ish = V * V_RATE;
+                    nds_vh = Mv_net * V_RATE;
+                    nds_budget = nds_ish - nds_vh;
+                    
+                    var isInput = (mode === 'split');
+                    pcSet('pcr-R', pcFmt(R), T + ' мин × 20');
+                    pcSet('pcr-M', pcFmt(M), pcFmt(Math.round(Mv_net)) + ' + ' + pcFmt(Mb));
+                    pcSet('pcr-S', pcFmt(S), pcFmt(R) + ' + ' + pcFmt(M));
+                    pcSet('pcr-nr', (nr*100).toFixed(1) + '%', isInput ? 'задано' : 'П ÷ С = ' + pcFmt(P) + ' ÷ ' + pcFmt(S));
+                    pcSet('pcr-nm', (nm*100).toFixed(1) + '%', isInput ? 'задано' : '= наценке на работы');
+                    pcSet('pcr-V', pcFmt(V), isInput 
+                        ? pcFmt(R) + '×' + (1+nr).toFixed(2) + ' + ' + pcFmt(M) + '×' + (1+nm).toFixed(2)
+                        : pcFmt(S) + ' × ' + (1+nr).toFixed(2));
+                    pcSet('pcr-Ts', pcFmt(Ts), pcFmt(V) + ' × 1.22');
+                    pcSet('pcr-P', pcFmt(P), pcFmt(V) + ' − ' + pcFmt(S));
+                    pcSet('pcr-NnP', '−' + pcFmt(NnP), pcFmt(P) + ' × 0.25');
+                    pcSet('pcr-CP', pcFmt(CP), pcFmt(P) + ' × 0.75');
+                    pcSet('pcr-m', (m*100).toFixed(1) + '%', pcFmt(CP) + ' ÷ ' + pcFmt(V));
+                    pcSet('pcr-nds', pcFmt(nds_budget), pcFmt(Math.round(nds_ish)) + ' − ' + pcFmt(Math.round(nds_vh)));
+                    var warn = document.getElementById('pcr-m-warn');
+                    if (warn) warn.style.display = (m > 0 && m < 0.3) ? '' : 'none';
+                }
+                
+                function pcNum(id) { var el = document.getElementById(id); return el ? (parseFloat(el.value) || 0) : 0; }
+                function pcFmt(n) { return Math.round(n).toLocaleString('ru-RU'); }
+                function pcSet(rowId, value, formula) {
+                    var row = document.getElementById(rowId);
+                    if (!row) return;
+                    var v = row.querySelector('.pc-value');
+                    if (v) v.textContent = value;
+                    var t = row.querySelector('.pc-tip');
+                    if (t) t.textContent = formula || '';
+                }
+                
+                // Автозапуск при показе раздела
+                var _origShowSection = typeof showSection === 'function' ? showSection : null;
+                if (_origShowSection) {
+                    var _pcPatched = false;
+                    var _pcObserver = new MutationObserver(function() {
+                        var sec = document.getElementById('pricing-calc');
+                        if (sec && sec.classList.contains('active') && !_pcPatched) {
+                            _pcPatched = true;
+                            setTimeout(pcCalc, 50);
+                        } else if (sec && !sec.classList.contains('active')) {
+                            _pcPatched = false;
+                        }
+                    });
+                    var _pcSec = document.getElementById('pricing-calc');
+                    if (_pcSec) _pcObserver.observe(_pcSec, { attributes: true, attributeFilter: ['class'] });
+                }
+                // Запуск при загрузке если раздел виден
+                document.addEventListener('DOMContentLoaded', function() { setTimeout(pcCalc, 100); });
+                setTimeout(pcCalc, 200);
+                </script>
             </section>
             
             <!-- РАБОТА С ИИ И ЗАМЕРЫ (защищённые разделы) -->
