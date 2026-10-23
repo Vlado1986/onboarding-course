@@ -3989,29 +3989,39 @@
                                 </ul>
                             </div>
                             
-                            <div class="card" style="border-left: 4px solid #4caf50;">
-                                <div class="card-title"><span class="card-icon">🕐</span> История (часики)</div>
-                                <p>Вернуться к недавно открытым документам:</p>
-                                <ul>
-                                    <li>Нажми значок <strong>часов 🕐</strong> (рядом с избранным)</li>
-                                    <li>Увидишь список последних 20-30 открытых документов</li>
-                                    <li>Кликни по нужному — сразу откроется</li>
-                                </ul>
-                                <p style="margin-top: 8px;"><strong>Когда полезно:</strong> Работал с заказом, отвлёкся, закрыл — не надо искать заново, просто открой из истории.</p>
+                            <div class="accordion" style="margin-bottom: 1.5rem;">
+                                <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                                    <span>🕐 История (часики)</span>
+                                    <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                                </div>
+                                <div class="setup-content" style="display: none; background: #fff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+                                    <p>Вернуться к недавно открытым документам:</p>
+                                    <ul>
+                                        <li>Нажми значок <strong>часов 🕐</strong> (рядом с избранным)</li>
+                                        <li>Увидишь список последних 20-30 открытых документов</li>
+                                        <li>Кликни по нужному — сразу откроется</li>
+                                    </ul>
+                                    <p style="margin-top: 8px;"><strong>Когда полезно:</strong> Работал с заказом, отвлёкся, закрыл — не надо искать заново, просто открой из истории.</p>
+                                </div>
                             </div>
                             
-                            <div class="card" style="border-left: 4px solid #e91e63;">
-                                <div class="card-title"><span class="card-icon">📜</span> Версионирование документов</div>
-                                <p><strong>У каждого документа есть история версий.</strong> Если что-то сделал неправильно — можно вернуться к предыдущей версии.</p>
-                                <ol>
-                                    <li>Открой документ (заказ, интерес и т.д.)</li>
-                                    <li>Меню <strong>«Ещё»</strong> (или правая кнопка мыши)</li>
-                                    <li>Выбери <strong>«История изменений»</strong> или <strong>«Версии объекта»</strong></li>
-                                    <li>Увидишь список версий с датой и автором изменения</li>
-                                    <li>Выбери нужную версию → <strong>«Восстановить»</strong></li>
-                                </ol>
-                                <div class="warning" style="margin-top: 12px;">
-                                    <strong>⚠️ Важно:</strong> Версионирование работает не для всех документов. Если не видишь историю — значит для этого типа документа она отключена.
+                            <div class="accordion" style="margin-bottom: 1.5rem;">
+                                <div class="accordion-header" onclick="toggleAccordion(this)" style="background: #f5f5f7; color: #1d1d1f; padding: 1rem 1.5rem; border-radius: 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; border: 1px solid #d2d2d7; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+                                    <span>📜 Версионирование документов</span>
+                                    <span class="accordion-icon" style="transition: transform 0.3s;">▼</span>
+                                </div>
+                                <div class="setup-content" style="display: none; background: #fff; border-radius: 0 0 12px 12px; padding: 1.5rem; margin-top: -8px; border: 1px solid #d2d2d7; border-top: none;">
+                                    <p><strong>У каждого документа есть история версий.</strong> Если что-то сделал неправильно — можно вернуться к предыдущей версии.</p>
+                                    <ol>
+                                        <li>Открой документ (заказ, интерес и т.д.)</li>
+                                        <li>Меню <strong>«Ещё»</strong> (или правая кнопка мыши)</li>
+                                        <li>Выбери <strong>«История изменений»</strong> или <strong>«Версии объекта»</strong></li>
+                                        <li>Увидишь список версий с датой и автором изменения</li>
+                                        <li>Выбери нужную версию → <strong>«Восстановить»</strong></li>
+                                    </ol>
+                                    <div class="warning" style="margin-top: 12px;">
+                                        <strong>⚠️ Важно:</strong> Версионирование работает не для всех документов. Если не видишь историю — значит для этого типа документа она отключена.
+                                    </div>
                                 </div>
                             </div>
                             
