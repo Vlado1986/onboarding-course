@@ -5661,22 +5661,22 @@
                     
                     <!-- Результаты -->
                     <div class="pc-results">
-                        <div class="pc-res-row" id="pcr-R"><span class="pc-label">Стоимость работ</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <div class="pc-res-row" style="color: #16a34a;" id="pcr-nr"><span class="pc-label">+ наценка на работы <span class="pc-pct" style="color: #6b7280; font-weight: 400;"></span></span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <div class="pc-res-row" id="pcr-M"><span class="pc-label">Стоимость материалов</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <div class="pc-res-row" style="color: #16a34a;" id="pcr-nm"><span class="pc-label">+ наценка на материалы <span class="pc-pct" style="color: #6b7280; font-weight: 400;"></span></span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <hr>
-                        <div class="pc-res-row" id="pcr-S"><span class="pc-label">Себестоимость</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <div class="pc-res-row" id="pcr-V"><span class="pc-label"><strong>Выручка без НДС</strong></span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <hr>
                         <div class="pc-res-row pc-big" id="pcr-Ts"><span class="pc-label">Цена клиенту с НДС</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <div class="pc-res-row" id="pcr-nds"><span class="pc-label" style="padding-left: 12px; color: var(--text-light);">в т.ч. НДС в бюджет</span><span class="pc-value" style="color: var(--text-light);">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <hr>
-                        <div class="pc-res-row" id="pcr-P"><span class="pc-label">Валовая прибыль</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <div class="pc-res-row pc-neg" id="pcr-NnP"><span class="pc-label">Налог на прибыль</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <div class="pc-res-row pc-total" id="pcr-CP"><span class="pc-label">ЧИСТАЯ ПРИБЫЛЬ</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
-                        <div class="pc-res-row" id="pcr-m"><span class="pc-label">Маржинальность</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row pc-neg" id="pcr-nds"><span class="pc-label" style="padding-left: 12px;">− НДС в бюджет</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row pc-neg" id="pcr-NnP"><span class="pc-label" style="padding-left: 12px;">− Налог на прибыль</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row pc-neg" id="pcr-S"><span class="pc-label" style="padding-left: 12px;">− Себестоимость</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row pc-total" id="pcr-CP"><span class="pc-label">= ЧИСТАЯ ПРИБЫЛЬ</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" id="pcr-m"><span class="pc-label" style="padding-left: 12px;">Маржинальность</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                         <div id="pcr-m-warn" style="display:none; padding: 6px 12px; margin: 4px 0; background: #fef2f2; border-left: 3px solid #dc2626; border-radius: 0 6px 6px 0; font-size: 13px; color: #991b1b;">⚠️ Минимальная маржинальность на товары производства — <strong>не ниже 30%</strong></div>
+                        <hr>
+                        <div style="font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); padding: 8px 0 4px;">Из чего складывается цена</div>
+                        <div class="pc-res-row" id="pcr-R"><span class="pc-label">Стоимость работ</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" style="color: #16a34a;" id="pcr-nr"><span class="pc-label" style="padding-left: 12px;">+ наценка <span class="pc-pct" style="color: #6b7280; font-weight: 400;"></span></span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" id="pcr-M"><span class="pc-label">Стоимость материалов</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" style="color: #16a34a;" id="pcr-nm"><span class="pc-label" style="padding-left: 12px;">+ наценка <span class="pc-pct" style="color: #6b7280; font-weight: 400;"></span></span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <hr>
+                        <div class="pc-res-row" id="pcr-V"><span class="pc-label"><strong>Выручка без НДС</strong></span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
+                        <div class="pc-res-row" id="pcr-P"><span class="pc-label">Валовая прибыль</span><span class="pc-value">—</span><span class="pc-info">ⓘ<span class="pc-tip"></span></span></div>
                     </div>
                 </div>
                 
@@ -5906,7 +5906,7 @@
                         var markupR_u = R * nr, markupM_u = M * nm;
                         pcSetNr('pcr-nr', pcFmt(markupR_u), (nr*100).toFixed(1) + '%', pcFmt(R) + ' × ' + (nr*100).toFixed(1) + '%');
                         pcSetNr('pcr-nm', pcFmt(markupM_u), (nm*100).toFixed(1) + '%', pcFmt(M) + ' × ' + (nm*100).toFixed(1) + '%');
-                        pcSet('pcr-S', pcFmt(S), pcFmt(R) + ' + ' + pcFmt(M));
+                        pcSet('pcr-S', '−' + pcFmt(S), pcFmt(R) + ' + ' + pcFmt(M));
                         pcSet('pcr-V', pcFmt(V), pcFmt(S) + ' × ' + (1+n_usn).toFixed(2));
                         pcSet('pcr-Ts', pcFmt(Ts), 'УСН — НДС не начисляется');
                         pcSet('pcr-P', pcFmt(P), pcFmt(V) + ' − ' + pcFmt(S));
@@ -5936,7 +5936,7 @@
                             if (m_t >= maxMargin) {
                                 pcSet('pcr-R', pcFmt(R), T + ' мин × 20');
                                 pcSet('pcr-M', pcFmt(M), pcFmt(Math.round(Mv/(1+V_RATE))) + ' + ' + pcFmt(Mb));
-                                pcSet('pcr-S', pcFmt(S), pcFmt(R) + ' + ' + pcFmt(M));
+                                pcSet('pcr-S', '−' + pcFmt(S), pcFmt(R) + ' + ' + pcFmt(M));
                                 pcSetNr('pcr-nr', '—', '—', 'маржа ≥ ' + (maxMargin*100) + '% невозможна');
                                 pcSetNr('pcr-nm', '—', '—', 'маржа ≥ ' + (maxMargin*100) + '% невозможна');
                                 pcSet('pcr-V', '⚠️ невозможно', 'При налоге ' + (T_RATE*100) + '% макс. маржа = ' + (maxMargin*100) + '%');
@@ -5981,7 +5981,7 @@
                     var markupR = R * nr, markupM = M * nm;
                     pcSetNr('pcr-nr', pcFmt(markupR), (nr*100).toFixed(1) + '%', isInput ? 'задано: ' + pcFmt(R) + ' × ' + (nr*100).toFixed(1) + '%' : pcFmt(R) + ' × ' + (nr*100).toFixed(1) + '%');
                     pcSetNr('pcr-nm', pcFmt(markupM), (nm*100).toFixed(1) + '%', isInput ? 'задано: ' + pcFmt(M) + ' × ' + (nm*100).toFixed(1) + '%' : pcFmt(M) + ' × ' + (nm*100).toFixed(1) + '%');
-                    pcSet('pcr-S', pcFmt(S), pcFmt(R) + ' + ' + pcFmt(M));
+                    pcSet('pcr-S', '−' + pcFmt(S), pcFmt(R) + ' + ' + pcFmt(M));
                     pcSet('pcr-V', pcFmt(V), isInput 
                         ? pcFmt(R) + '×' + (1+nr).toFixed(2) + ' + ' + pcFmt(M) + '×' + (1+nm).toFixed(2)
                         : pcFmt(S) + ' × ' + (1+nr).toFixed(2));
