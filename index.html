@@ -5928,8 +5928,24 @@
                             break;
                         case 'margin':
                             var m_t = pcNum('pc-margin') / 100;
-                            var denom = (1 - T_RATE) - m_t;
-                            V = denom > 0 ? S * (1 - T_RATE) / denom : 0;
+                            var maxMargin = 1 - T_RATE;
+                            if (m_t >= maxMargin) {
+                                pcSet('pcr-R', pcFmt(R), T + ' мин × 20');
+                                pcSet('pcr-M', pcFmt(M), pcFmt(Math.round(Mv/(1+V_RATE))) + ' + ' + pcFmt(Mb));
+                                pcSet('pcr-S', pcFmt(S), pcFmt(R) + ' + ' + pcFmt(M));
+                                pcSet('pcr-nr', '—', 'маржа ≥ ' + (maxMargin*100) + '% невозможна');
+                                pcSet('pcr-nm', '—', 'маржа ≥ ' + (maxMargin*100) + '% невозможна');
+                                pcSet('pcr-V', '⚠️ невозможно', 'При налоге ' + (T_RATE*100) + '% макс. маржа = ' + (maxMargin*100) + '%');
+                                pcSet('pcr-Ts', '—', '');
+                                pcSet('pcr-P', '—', ''); pcSet('pcr-NnP', '—', '');
+                                pcSet('pcr-CP', '—', ''); pcSet('pcr-m', '—', '');
+                                pcSet('pcr-nds', '—', '');
+                                var warn = document.getElementById('pcr-m-warn');
+                                if (warn) warn.style.display = 'none';
+                                return;
+                            }
+                            var denom = maxMargin - m_t;
+                            V = S * maxMargin / denom;
                             P = V - S;
                             nr = S > 0 ? P / S : 0; nm = nr;
                             break;
