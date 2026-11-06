@@ -3314,7 +3314,6 @@
                         <ul>
                             <li><a href="#" onclick="scrollToElement('internal-about'); return false;"><strong>О компании</strong></a> — полная версия с тестом на 10 вопросов</li>
                             <li><a href="#" onclick="scrollToElement('internal-mission'); return false;"><strong>Миссия и ценности</strong></a> — речевые модули и тест</li>
-                            <li><a href="#" onclick="scrollToElement('internal-conditions'); return false;"><strong>Условия работы</strong></a> — система мотивации и тест</li>
                             <li><a href="#" onclick="scrollToElement('internal-1c'); return false;"><strong>Работа в 1С</strong></a> — алгоритмы работы с системой</li>
                             <li><a href="#" onclick="scrollToElement('internal-measurement'); return false;"><strong>Правила замера</strong></a> — инструкции по выполнению замеров</li>
                         </ul>
@@ -3686,165 +3685,6 @@
                         </div>
                     </div>
                     
-                    <hr style="margin: 40px 0; border: none; border-top: 2px solid var(--border);">
-                    
-                    <!-- УСЛОВИЯ РАБОТЫ -->
-                    <div id="internal-conditions">
-                        <h1>Условия работы и мотивация</h1>
-                        <p class="lead">Прозрачная система оплаты: ты точно знаешь, сколько заработаешь и от чего это зависит.</p>
-                    
-                    <h2>Структура дохода</h2>
-                    <p>Доход менеджера состоит из двух частей:</p>
-                    <ul>
-                        <li><strong>Оклад</strong> — фиксированная часть, выплачивается независимо от результата</li>
-                        <li><strong>Премия</strong> — процент от маржи с продаж</li>
-                    </ul>
-                    
-                    <div class="card">
-                        <div class="card-title"><span class="card-icon">💰</span> Как считается премия</div>
-                        <p>Премия = % от маржи. Маржа = Цена продажи − Себестоимость.</p>
-                        <p>Процент зависит от выполнения плана и типа продукта:</p>
-                        <table>
-                            <tr><th>Тип продукта</th><th>% от маржи</th></tr>
-                            <tr><td>Перепродажа (металлочерепица, сайдинг и т.д.)</td><td>10-15%</td></tr>
-                            <tr><td>Собственное производство (колпаки, кожухи и т.д.)</td><td>15-20%</td></tr>
-                            <tr><td>Монтаж</td><td>5-10%</td></tr>
-                        </table>
-                    </div>
-                    
-                    <h2>Что влияет на доход</h2>
-                    <table>
-                        <tr><th>Фактор</th><th>Как влияет</th></tr>
-                        <tr><td>Количество сделок</td><td>Больше сделок = больше базы для расчёта премии</td></tr>
-                        <tr><td>Маржинальность</td><td>Продажа с хорошей наценкой приносит больше, чем «слив» по минимальной цене</td></tr>
-                        <tr><td>Продажа собственного производства</td><td>Маржа выше, чем на перепродаже — выгоднее для тебя</td></tr>
-                        <tr><td>Допродажи</td><td>Доборные элементы, монтаж, аксессуары — это дополнительная прибыль</td></tr>
-                    </table>
-                    
-                    <h2>Испытательный срок</h2>
-                    <ul>
-                        <li><strong>Длительность:</strong> 3 месяца</li>
-                        <li><strong>Оклад:</strong> полный с первого дня</li>
-                        <li><strong>Премия:</strong> начисляется со второго месяца</li>
-                        <li><strong>Обучение:</strong> прохождение этого курса + работа с наставником</li>
-                    </ul>
-                    
-                    <h2>Рабочий график</h2>
-                    <ul>
-                        <li><strong>Режим:</strong> 5/2, с 9:00 до 18:00</li>
-                        <li><strong>Обед:</strong> 1 час</li>
-                        <li><strong>Формат:</strong> офис (после испытательного срока возможна частичная удалёнка)</li>
-                    </ul>
-                    
-                    <div class="highlight">
-                        <div class="highlight-title">💡 Важно</div>
-                        <p>Чем лучше ты знаешь продукт и умеешь работать с клиентом — тем больше зарабатываешь. Система прозрачная: каждый может посчитать свою премию.</p>
-                    </div>
-                    
-                    <!-- ТЕСТ УСЛОВИЯ: 10 вопросов -->
-                    <div class="quiz" id="quiz-conditions">
-                        <div class="quiz-header">
-                            <span class="quiz-icon">✍️</span>
-                            <div>
-                                <div class="quiz-title">Проверь себя</div>
-                                <div class="quiz-subtitle">10 вопросов по разделу «Условия работы»</div>
-                            </div>
-                        </div>
-                        
-                        <div class="question" data-correct="1">
-                            <div class="question-text"><span class="question-number">1.</span> Из чего состоит доход менеджера?</div>
-                            <div class="options">
-                                <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Только премия</div></div>
-                                <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Оклад + премия от маржи</div></div>
-                                <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Только оклад</div></div>
-                            </div>
-                        </div>
-                        
-                        <div class="question" data-correct="2">
-                            <div class="question-text"><span class="question-number">2.</span> Сколько длится испытательный срок?</div>
-                            <div class="options">
-                                <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">1 месяц</div></div>
-                                <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">6 месяцев</div></div>
-                                <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">3 месяца</div></div>
-                            </div>
-                        </div>
-                        
-                        <div class="question" data-correct="0">
-                            <div class="question-text"><span class="question-number">3.</span> На какой продукт выше процент премии?</div>
-                            <div class="options">
-                                <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Собственное производство</div></div>
-                                <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Перепродажа</div></div>
-                                <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Одинаковый везде</div></div>
-                            </div>
-                        </div>
-                        
-                        <div class="question" data-correct="1">
-                            <div class="question-text"><span class="question-number">4.</span> Как рассчитывается маржа?</div>
-                            <div class="options">
-                                <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Цена продажи − НДС</div></div>
-                                <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Цена продажи − Себестоимость</div></div>
-                                <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Цена продажи − Себестоимость − Премия менеджера</div></div>
-                            </div>
-                        </div>
-                        
-                        <div class="question" data-correct="2">
-                            <div class="question-text"><span class="question-number">5.</span> Когда начисляется премия на испытательном сроке?</div>
-                            <div class="options">
-                                <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">С первого дня</div></div>
-                                <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">После испытательного срока</div></div>
-                                <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Со второго месяца</div></div>
-                            </div>
-                        </div>
-                        
-                        <div class="question" data-correct="0">
-                            <div class="question-text"><span class="question-number">6.</span> Какой рабочий график?</div>
-                            <div class="options">
-                                <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">5/2, с 9:00 до 18:00</div></div>
-                                <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">2/2, посменно</div></div>
-                                <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">5/2, с 10:00 до 19:00</div></div>
-                            </div>
-                        </div>
-                        
-                        <div class="question" data-correct="1">
-                            <div class="question-text"><span class="question-number">7.</span> Что выгоднее продавать с точки зрения премии?</div>
-                            <div class="options">
-                                <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Металлочерепицу</div></div>
-                                <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Колпаки и кожухи (собственное производство)</div></div>
-                                <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Монтажные работы</div></div>
-                            </div>
-                        </div>
-                        
-                        <div class="question" data-correct="0">
-                            <div class="question-text"><span class="question-number">8.</span> Что такое допродажи?</div>
-                            <div class="options">
-                                <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Доборные элементы, монтаж, аксессуары к основному заказу</div></div>
-                                <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Повторные продажи тому же клиенту</div></div>
-                                <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Продажи по скидкам</div></div>
-                            </div>
-                        </div>
-                        
-                        <div class="question" data-correct="2">
-                            <div class="question-text"><span class="question-number">9.</span> Возможна ли удалённая работа?</div>
-                            <div class="options">
-                                <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Нет, только офис</div></div>
-                                <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Да, с первого дня</div></div>
-                                <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">После испытательного срока возможна частичная удалёнка</div></div>
-                            </div>
-                        </div>
-                        
-                        <div class="question" data-correct="1">
-                            <div class="question-text"><span class="question-number">10.</span> Какой процент от маржи на монтаже?</div>
-                            <div class="options">
-                                <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">15-20%</div></div>
-                                <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">5-10%</div></div>
-                                <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">25%</div></div>
-                            </div>
-                        </div>
-                        
-                        <button class="btn-check" onclick="checkQuiz('quiz-conditions')">Проверить ответы</button>
-                        <div class="quiz-result" id="result-quiz-conditions"></div>
-                    </div>
-                    </div><!-- конец internal-conditions -->
                     
             <!-- РАБОТА В 1С (отдельная секция) -->
             </div><!-- conditions-content -->
@@ -22857,7 +22697,6 @@
         // Маппинг quiz-id к section-id
         const quizToSection = {
             'quiz-intro': 'intro',
-            'quiz-conditions': 'conditions',
             'quiz-1c': 'internal-1c',
             'quiz-products': 'products',
             'quiz-sales': 'sales',
