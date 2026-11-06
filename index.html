@@ -1483,10 +1483,6 @@
             <span class="nav-item-icon">💼</span>
             Условия работы
         </a>
-        <a class="nav-item internal-only" data-section="conditions-ai" onclick="showSection('conditions-ai')">
-            <span class="nav-item-icon">🤖</span>
-            Работа с ИИ (Kiro)
-        </a>
         <a class="nav-item internal-only" data-section="measurement" onclick="showSection('measurement')">
             <span class="nav-item-icon">📏</span>
             Правила замера
@@ -3320,7 +3316,6 @@
                             <li><a href="#" onclick="scrollToElement('internal-mission'); return false;"><strong>Миссия и ценности</strong></a> — речевые модули и тест</li>
                             <li><a href="#" onclick="scrollToElement('internal-conditions'); return false;"><strong>Условия работы</strong></a> — система мотивации и тест</li>
                             <li><a href="#" onclick="scrollToElement('internal-1c'); return false;"><strong>Работа в 1С</strong></a> — алгоритмы работы с системой</li>
-                            <li><a href="#" onclick="scrollToElement('internal-ai'); return false;"><strong>Работа с ИИ (Kiro)</strong></a> — как использовать ИИ-ассистента</li>
                             <li><a href="#" onclick="scrollToElement('internal-measurement'); return false;"><strong>Правила замера</strong></a> — инструкции по выполнению замеров</li>
                         </ul>
                     </div>
@@ -6058,7 +6053,7 @@
                 
                 <div class="section-nav">
                     <button class="btn-nav" onclick="showSection('internal-1c')">← Работа в 1С</button>
-                    <button class="btn-nav primary" onclick="showSection('conditions-ai')">Работа с ИИ →</button>
+                    <button class="btn-nav primary" onclick="showSection('measurement')">Правила замера →</button>
                 </div>
                 
                 <script>
@@ -6250,236 +6245,6 @@
             </section>
             
             <!-- РАБОТА С ИИ И ЗАМЕРЫ (защищённые разделы) -->
-            <section class="section internal-only" id="conditions-ai">
-                <div id="conditions-ai-content">
-                    
-                    <!-- РАБОТА С ИИ (KIRO) -->
-                    <div id="internal-ai">
-                        <h1>🤖 Работа с ИИ (Kiro)</h1>
-                        <p class="lead">ИИ-ассистент Kiro помогает работать быстрее: анализирует данные из 1С, готовит отчёты, отвечает на вопросы по продукции и процессам. Это не замена, а инструмент — как калькулятор для бухгалтера.</p>
-                        
-                        <div style="text-align: center; margin: 1.5rem 0;">
-                            <a href="https://kiro.wtw.ru" target="_blank" style="display: inline-block; padding: 14px 32px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #fff; text-decoration: none; border-radius: 12px; font-size: 1.1em; font-weight: 600; box-shadow: 0 4px 15px rgba(102,126,234,0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">🤖 Перейти к Kiro</a>
-                        </div>
-                        
-                        <div class="important-box" style="background: #e3f2fd; border-color: #2196f3;">
-                            <strong>📌 Как работать с Kiro</strong>
-                            <p style="margin-top: 8px;">Kiro работает в <strong>своём отдельном диалоговом окне</strong> (чате). Это не часть 1С и не часть курса — это самостоятельное приложение. Нажмите кнопку выше, откроется окно чата. Пишите вопрос обычным текстом, как в мессенджере — Kiro ответит.</p>
-                            <p style="margin-top: 8px;">Каждый новый вопрос — новый диалог. Kiro помнит контекст в рамках одного диалога, но не помнит, что вы спрашивали вчера.</p>
-                        </div>
-                        
-                        <div class="highlight">
-                            <div class="highlight-title">💡 Что такое Kiro</div>
-                            <p><strong>Kiro</strong> — это ИИ-ассистент, подключённый к базе 1С и базе знаний компании. Он понимает русский язык, знает нашу номенклатуру, состояния заказов, правила расчётов. Работает в чате — пишете вопрос, получаете ответ.</p>
-                        </div>
-                        
-                        <h2>Что умеет Kiro</h2>
-                        
-                        <div class="card" style="border-left: 4px solid #2ecc71;">
-                            <div class="card-title"><span class="card-icon">✅</span> Работа с данными 1С</div>
-                            <ul>
-                                <li><strong>Найти заказ</strong> — «покажи заказ 1234» или «что с заказом Топхаус от 15 мая»</li>
-                                <li><strong>Проверить оплату</strong> — «оплачен ли заказ 567?»</li>
-                                <li><strong>Посмотреть задолженность</strong> — «дебиторка по Иванову» или «сформируй отчёт по долгам»</li>
-                                <li><strong>Узнать остатки</strong> — «есть ли металл 7024 на складе?»</li>
-                                <li><strong>Статистика продаж</strong> — «сколько продали колпаков за сентябрь?»</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="card" style="border-left: 4px solid #3498db;">
-                            <div class="card-title"><span class="card-icon">📊</span> Отчёты и аналитика</div>
-                            <ul>
-                                <li><strong>Отчёт по деньгам</strong> — «покажи авансы» или «деньги и долги на сегодня»</li>
-                                <li><strong>Прибыль</strong> — «прибыль за август» (формирует HTML-отчёт)</li>
-                                <li><strong>Сравнения</strong> — «сравни продажи этого месяца с прошлым»</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="card" style="border-left: 4px solid #9b59b6;">
-                            <div class="card-title"><span class="card-icon">📚</span> Знания о продукции</div>
-                            <ul>
-                                <li><strong>Ответы по номенклатуре</strong> — «что такое колпак ВЕНА?», «в чём разница между БЕРЛИН и КИЛЬ?»</li>
-                                <li><strong>Технические вопросы</strong> — «минимальный уклон для фальца?», «какую мембрану ставить на эксплуатируемую кровлю?»</li>
-                                <li><strong>Правила и процессы</strong> — «как проверить оплату заказа?», «что значит состояние 33?»</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="card" style="border-left: 4px solid #f39c12;">
-                            <div class="card-title"><span class="card-icon">🔧</span> Автоматизация</div>
-                            <ul>
-                                <li><strong>Напоминания</strong> — «напомни завтра в 10 позвонить клиенту»</li>
-                                <li><strong>Поручения</strong> — «уточни у бухгалтера статус акта сверки»</li>
-                                <li><strong>Мониторинг</strong> — «каждый день в 9 утра присылай список просроченных заказов»</li>
-                            </ul>
-                        </div>
-                        
-                        <h2>Как разговаривать с Kiro</h2>
-                        
-                        <div class="card">
-                            <div class="card-title"><span class="card-icon">💬</span> Принципы общения</div>
-                            <ul>
-                                <li><strong>Пишите как человеку</strong> — не нужно специальных команд, просто опишите задачу</li>
-                                <li><strong>Будьте конкретны</strong> — «заказ 1234» лучше, чем «тот заказ»</li>
-                                <li><strong>Уточняйте</strong> — если Kiro спрашивает, отвечайте на вопрос</li>
-                                <li><strong>Проверяйте</strong> — ИИ может ошибиться, особенно в сложных расчётах</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="card">
-                            <div class="card-title"><span class="card-icon">📝</span> Примеры запросов</div>
-                            <table class="comparison-table" style="margin-top: 8px;">
-                                <tr style="background: var(--primary-light);">
-                                    <th style="padding: 8px; width: 50%;">Задача</th>
-                                    <th style="padding: 8px;">Как написать</th>
-                                </tr>
-                                <tr>
-                                    <td>Найти заказ клиента</td>
-                                    <td>«Покажи заказы Топхаус за последнюю неделю»</td>
-                                </tr>
-                                <tr>
-                                    <td>Проверить долги</td>
-                                    <td>«Дебиторка по контрагенту Сидоров»</td>
-                                </tr>
-                                <tr>
-                                    <td>Сформировать отчёт</td>
-                                    <td>«Сделай отчёт по авансам на сегодня»</td>
-                                </tr>
-                                <tr>
-                                    <td>Узнать наличие металла</td>
-                                    <td>«Есть ли 9005-0.5-PE на складе?»</td>
-                                </tr>
-                                <tr>
-                                    <td>Технический вопрос</td>
-                                    <td>«Какой минимальный уклон для металлочерепицы по СП?»</td>
-                                </tr>
-                                <tr>
-                                    <td>Напоминание</td>
-                                    <td>«Напомни мне завтра в 14:00 про звонок Петрову»</td>
-                                </tr>
-                            </table>
-                        </div>
-                        
-                        <h2>Чего Kiro НЕ делает</h2>
-                        
-                        <div class="card" style="border-left: 4px solid #e74c3c;">
-                            <div class="card-title"><span class="card-icon">⚠️</span> Ограничения</div>
-                            <ul>
-                                <li><strong>Не создаёт документы в 1С</strong> — заказы, реализации, счета создаёте вы</li>
-                                <li><strong>Не меняет данные</strong> — только читает и анализирует</li>
-                                <li><strong>Не звонит клиентам</strong> — это ваша работа</li>
-                                <li><strong>Не принимает решения за вас</strong> — даёт информацию для решения</li>
-                                <li><strong>Может ошибаться</strong> — всегда проверяйте критичные данные в 1С</li>
-                            </ul>
-                        </div>
-                        
-                        <h2>Если что-то не работает</h2>
-                        
-                        <div class="card">
-                            <div class="card-title"><span class="card-icon">🔧</span> Частые проблемы</div>
-                            <ul>
-                                <li><strong>«MCP недоступен»</strong> — нет подключения к базе 1С. Проверьте, что туннель открыт (спросите у техподдержки)</li>
-                                <li><strong>Kiro не понимает вопрос</strong> — переформулируйте проще, укажите конкретные данные (номер заказа, имя клиента)</li>
-                                <li><strong>Данные устарели</strong> — Kiro видит данные на момент запроса; если только что провели документ, подождите минуту</li>
-                                <li><strong>Неправильный ответ</strong> — уточните вопрос или проверьте данные напрямую в 1С</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="highlight">
-                            <div class="highlight-title">🎯 Главное правило</div>
-                            <p>Kiro — это <strong>помощник</strong>, а не замена. Он ускоряет рутину, но ответственность за данные и решения остаётся на вас. Используйте его для поиска информации, подготовки отчётов, ответов на вопросы — но критичные данные проверяйте в первоисточнике.</p>
-                        </div>
-                        
-                        <!-- Готовые речевые модули для ИИ -->
-                        <div class="speech-modules">
-                            <div class="speech-modules-title">🎯 Готовые запросы на каждый день</div>
-                            
-                            <div class="speech-item">
-                                <div class="speech-situation">Утренняя проверка:</div>
-                                <div class="speech-text">«Покажи мои заказы в работе» или «Что нового по моим заказам со вчера?»</div>
-                            </div>
-                            
-                            <div class="speech-item">
-                                <div class="speech-situation">Клиент спрашивает о статусе:</div>
-                                <div class="speech-text">«Статус заказа 1234» или «Когда будет готов заказ Петрова?»</div>
-                            </div>
-                            
-                            <div class="speech-item">
-                                <div class="speech-situation">Нужно выставить счёт:</div>
-                                <div class="speech-text">«Какая сумма по заказу 567?» — проверить перед выставлением счёта</div>
-                            </div>
-                            
-                            <div class="speech-item">
-                                <div class="speech-situation">Работа с дебиторкой:</div>
-                                <div class="speech-text">«Сформируй отчёт по долгам» или «Покажи просроченные платежи»</div>
-                            </div>
-                        </div>
-                        
-                        <!-- ТЕСТ ПО ИИ -->
-                        <div class="quiz" id="quiz-ai">
-                            <div class="quiz-header">
-                                <span class="quiz-icon">✍️</span>
-                                <div>
-                                    <div class="quiz-title">Проверь себя</div>
-                                    <div class="quiz-subtitle">5 вопросов по работе с Kiro</div>
-                                </div>
-                            </div>
-                            
-                            <div class="question" data-correct="1">
-                                <div class="question-text"><span class="question-number">1.</span> Что такое Kiro?</div>
-                                <div class="options">
-                                    <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Программа для создания документов</div></div>
-                                    <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">ИИ-ассистент, подключённый к 1С и базе знаний</div></div>
-                                    <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Модуль 1С для отчётов</div></div>
-                                </div>
-                            </div>
-                            
-                            <div class="question" data-correct="2">
-                                <div class="question-text"><span class="question-number">2.</span> Может ли Kiro создавать заказы в 1С?</div>
-                                <div class="options">
-                                    <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Да, это его основная функция</div></div>
-                                    <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Да, но только простые заказы</div></div>
-                                    <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Нет, только читает и анализирует данные</div></div>
-                                </div>
-                            </div>
-                            
-                            <div class="question" data-correct="0">
-                                <div class="question-text"><span class="question-number">3.</span> Как попросить Kiro показать задолженность клиента?</div>
-                                <div class="options">
-                                    <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">«Дебиторка по контрагенту Иванов»</div></div>
-                                    <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Указать номер регистра расчётов и код контрагента</div></div>
-                                    <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Сначала открыть отчёт в 1С и прислать Kiro скриншот</div></div>
-                                </div>
-                            </div>
-                            
-                            <div class="question" data-correct="1">
-                                <div class="question-text"><span class="question-number">4.</span> Что делать, если Kiro выдаёт ошибку «MCP недоступен»?</div>
-                                <div class="options">
-                                    <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Перезагрузить компьютер</div></div>
-                                    <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Проверить подключение к базе 1С (туннель)</div></div>
-                                    <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Написать запрос заново</div></div>
-                                </div>
-                            </div>
-                            
-                            <div class="question" data-correct="2">
-                                <div class="question-text"><span class="question-number">5.</span> Нужно ли проверять данные Kiro в 1С?</div>
-                                <div class="options">
-                                    <div class="option" data-value="0" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Нет, Kiro берёт данные напрямую из 1С</div></div>
-                                    <div class="option" data-value="1" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Только если данные выглядят странно</div></div>
-                                    <div class="option" data-value="2" onclick="selectOption(this)"><div class="option-radio"></div><div class="option-text">Да, критичные данные всегда нужно проверять</div></div>
-                                </div>
-                            </div>
-                            
-                            <button class="btn-check" onclick="checkQuiz('quiz-ai')">Проверить ответы</button>
-                            <div class="quiz-result" id="result-quiz-ai"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="section-nav">
-                        <button class="btn-nav" onclick="showSection('conditions')">← Условия работы</button>
-                        <button class="btn-nav primary" onclick="showSection('measurement')">Правила замера →</button>
-                    </div>
-                </div>
-            </section>
             
             <!-- ПРАВИЛА ЗАМЕРА (отдельная секция) -->
             <section class="section internal-only" id="measurement">
@@ -6776,7 +6541,7 @@
                         </div>
                         
                         <div class="section-nav">
-                            <button class="btn-nav" onclick="showSection('conditions-ai')">← Работа с ИИ</button>
+                            <button class="btn-nav" onclick="showSection('pricing-calc')">← Расчёт стоимости</button>
                             <button class="btn-nav primary" onclick="showSection('job-instructions')">Инструкции к должности →</button>
                         </div>
                     </div>
@@ -23094,7 +22859,6 @@
             'quiz-intro': 'intro',
             'quiz-conditions': 'conditions',
             'quiz-1c': 'internal-1c',
-            'quiz-ai': 'conditions-ai',
             'quiz-products': 'products',
             'quiz-sales': 'sales',
             'quiz-roofing': 'roofing',
